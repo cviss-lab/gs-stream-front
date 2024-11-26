@@ -1,0 +1,15 @@
+# IDE configuration files
+.vscode
+
+# Build artifacts
+build/
+docker-build-*
+
+# Package and environment settings
+node_modules/
+.env.*
+
+# System files and others
+.DS_Store
+.coverage
+*.splat
