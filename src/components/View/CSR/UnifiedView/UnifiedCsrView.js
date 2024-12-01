@@ -1,4 +1,3 @@
-// src/pages/RenderingPage.js
 import React, {
   useRef,
   useState,
@@ -33,7 +32,7 @@ const handleRotate = (axis, direction, refs) => {
   });
 };
 
-function RenderingPage() {
+function UnifiedCsrView() {
   const [selectedObjects, setSelectedObjects] = useState([]);
   const [aiFunctions, setAiFunctions] = useState({
     measurement: false,
@@ -607,4 +606,4 @@ function RenderingPage() {
   );
 }
 
-export default RenderingPage;
+export default UnifiedCsrView;

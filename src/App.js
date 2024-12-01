@@ -13,7 +13,7 @@ import CsrDualView from './components/View/CSR/Dual/CsrDualView';
 import Login from './components/Login/Login';
 import Landing from './components/Main/Landing';
 import Landing2 from './components/Main/Landing2';
-import RenderingPage from './components/View/CSR/Combine/Render';
+import RenderingPage from './components/View/CSR/UnifiedView/UnifiedCsrView';
 
 function App() {
   const [token, setToken] = useState(null);
