@@ -1,15 +1,11 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from 'react';
+import React, { useState, useMemo } from 'react';
 import TopNavigation from './components/TopNavigation';
 import ControlPanel from './components/ControlPanel';
 import RenderArea from './components/RenderArea';
 import CameraControlPanel from './components/CameraControlPanel';
 import { DUAL_VIEW_SETTINGS } from '../Dual/CsrDualViewSettings';
+import { useModelData } from './hooks/useModelData';
+import { useCameraControls } from './hooks/useCameraControls';
 
 // Helper functions
 const handleMove = (axis, direction, refs) => {
@@ -36,47 +32,14 @@ function UnifiedCsrView() {
   const [rotationDelta, setRotationDelta] = useState(
     DUAL_VIEW_SETTINGS.rotationDelta,
   );
-  const [allModels, setAllModels] = useState([]);
 
   const backendCsrAddress = process.env.REACT_APP_CSR_BACKEND_URL;
-  const cameraControlsRef1 = useRef(null);
-  const cameraControlsRef2 = useRef(null);
+  const { allModels } = useModelData(backendCsrAddress);
+  const { cameraControlsRef1, cameraControlsRef2, handleResetCamera } =
+    useCameraControls();
 
   const getWebglModelUrl = (modelId) =>
     `${backendCsrAddress}/api/assets/splat/${modelId}`;
-
-  const handleResetCamera = useCallback(() => {
-    [cameraControlsRef1, cameraControlsRef2].forEach((ref) => {
-      if (ref.current) ref.current.resetCamera();
-    });
-  }, []);
-
-  // Keyboard event listener
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key.toLowerCase() === 'r') handleResetCamera();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleResetCamera]);
-
-  // Fetch model data
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      fetch(`${backendCsrAddress}/api/assets/splat/list`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (JSON.stringify(data) !== JSON.stringify(allModels)) {
-            setAllModels(data);
-          }
-        })
-        .catch((error) => {
-          console.error('Fetching data failed', error);
-          setAllModels([]);
-        });
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, [allModels, backendCsrAddress]);
 
   const handleObjectSelection = (modelId) => {
     setSelectedObjects((prev) =>
