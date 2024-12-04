@@ -1,91 +1,92 @@
-body, html {
-    margin: 0;
-    padding: 0;
-  }
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
 
-.content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
 }
 
 .email-input-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .divider {
-    height: 2px; 
-    background-color: #ccc;
-    width: 70%; 
-    margin: 20px auto; 
-  }
-  
+  height: 2px;
+  background-color: #ccc;
+  width: 70%;
+  margin: 20px auto;
+}
+
 .section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-} 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 
 .section h2 {
-    margin-top: 0px;
-    margin-bottom: 1px;
+  margin-top: 0px;
+  margin-bottom: 1px;
 }
 
 .model-selector {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .model-selector p {
-    margin-top: 0px;
-    margin-bottom: 10px;
-}  
-
-.form-action{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 10px;
 }
 
-canvas{
-        border: 1px solid #000;
-        display: block;
-        box-sizing: border-box;
+.form-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+canvas {
+  border: 1px solid #000;
+  display: block;
+  box-sizing: border-box;
 }
 
 .button-container {
-    margin-top: 20px;
-    display: flex; /* Use flexbox layout to arrange child elements in a row */
-    align-items: center; /* Vertically center align the button and text */
-    font-size: 16px; /* Adjust the font-size as needed */
-    line-height: 1.5; /* Adjust the line-height to match the button's height */
+  margin-top: 20px;
+  display: flex; /* Use flexbox layout to arrange child elements in a row */
+  align-items: center; /* Vertically center align the button and text */
+  font-size: 16px; /* Adjust the font-size as needed */
+  line-height: 1.5; /* Adjust the line-height to match the button's height */
 }
 
 .button-container button {
-    line-height: 1.5; /* Make the button's line-height match the container's */
-    height: auto; /* Or set a specific height if needed */
-    padding: 0.5em 1em; /* Adjust button padding as needed */
+  line-height: 1.5; /* Make the button's line-height match the container's */
+  height: auto; /* Or set a specific height if needed */
+  padding: 0.5em 1em; /* Adjust button padding as needed */
 }
 
 .button-container span {
-    margin-right: 10px; /* Set the right margin to 10 pixels */
-    display: flex; /* This makes the span a flex container */
-    align-items: center; /* This centers its content vertically */
+  margin-right: 10px; /* Set the right margin to 10 pixels */
+  display: flex; /* This makes the span a flex container */
+  align-items: center; /* This centers its content vertically */
 }

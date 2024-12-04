@@ -1,13 +1,16 @@
 {
-    "extends": ["react-app", "plugin:prettier/recommended"],
-    "rules": {
-      "prettier/prettier": ["error"],
-      "no-restricted-globals": ["error", {
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "no-restricted-globals": [
+      "error",
+      {
         "name": "self",
         "message": "self is allowed only in Web Workers"
-      }]
-    },
-    "env": {
-      "es2020": true
-    }
+      }
+    ]
+  },
+  "env": {
+    "es2020": true
+  }
 }
