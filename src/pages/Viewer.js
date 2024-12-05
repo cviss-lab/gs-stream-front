@@ -1,18 +1,18 @@
 // React related imports
 import React, { useState, useMemo } from 'react';
 
-// Component imports (alphabetical order)
-import CameraControlPanel from 'components/View/CSR/UnifiedView/components/CameraControlPanel';
-import ControlPanel from 'components/View/CSR/UnifiedView/components/ControlPanel';
-import RenderArea from 'components/View/CSR/UnifiedView/components/RenderArea';
-import TopNavigation from 'components/View/CSR/UnifiedView/components/TopNavigation';
+// Component imports
+import CameraControlPanel from 'features/viewer/components/CameraControlPanel';
+import ControlPanel from 'features/viewer/components/ControlPanel';
+import RenderArea from 'features/viewer/components/RenderArea';
+import TopNavigation from 'features/viewer/components/TopNavigation';
 
 // Constants
-import { DUAL_VIEW_SETTINGS } from 'components/View/CSR/Dual/CsrDualViewSettings';
+import { DUAL_VIEW_SETTINGS } from 'features/viewer/constants/viewerSettings';
 
 // Custom hooks
-import { useCameraControls } from 'components/View/CSR/UnifiedView/hooks/useCameraControls';
-import { useModelData } from 'components/View/CSR/UnifiedView/hooks/useModelData';
+import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
+import { useModelData } from 'features/viewer/hooks/useModelData';
 
 // Helper functions
 const handleMove = (axis, direction, refs) => {

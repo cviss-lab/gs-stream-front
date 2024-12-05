@@ -1,5 +1,5 @@
 import React from 'react';
-import CsrCanvas from '../../CommonCSR/CsrCanvas';
+import InspectionCanvas from './InspectionCanvas';
 
 function RenderArea({
   selectedObjects,
@@ -26,7 +26,7 @@ function RenderArea({
         .filter((object) => object !== undefined)
         .map((object, index) => (
           <div key={object.id} className="w-full h-full relative">
-            <CsrCanvas
+            <InspectionCanvas
               ref={
                 selectedObjects.length === 1
                   ? cameraControlsRef1
