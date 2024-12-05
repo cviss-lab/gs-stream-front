@@ -13,7 +13,7 @@ import CsrDualView from './components/View/CSR/Dual/CsrDualView';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Landing2 from './components/Main/Landing2';
-import RenderingPage from './components/View/CSR/UnifiedView/UnifiedCsrView';
+import Viewer from './pages/Viewer';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -30,7 +30,7 @@ function App() {
         />
         <Route path="/landing1" element={<Home />} />
         <Route path="/landing2" element={<Landing2 />} />
-        <Route path="/render" element={<RenderingPage />} />
+        <Route path="/viewer" element={<Viewer />} />
         <Route
           path="/dual-view"
           element={

@@ -79,7 +79,7 @@ export default function Home() {
               Solutions
             </a>
             <a
-              href="/render"
+              href="/viewer"
               className="bg-sky-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-sky-700 transition-all shadow-lg hover:shadow-sky-200 inline-flex items-center gap-2"
             >
               Get Started
@@ -112,7 +112,7 @@ export default function Home() {
                 AI analytics.
               </p>
               <a
-                href="/render"
+                href="/viewer"
                 className="bg-sky-600 text-white px-6 py-3 rounded-xl text-lg font-semibold hover:bg-sky-700 transition-all shadow-xl hover:shadow-sky-200 inline-flex items-center gap-2"
               >
                 Launch Inspection
@@ -187,7 +187,7 @@ export default function Home() {
               5G-powered drone inspection system.
             </p>
             <a
-              href="/render"
+              href="/viewer"
               className="bg-white text-sky-600 px-6 py-2.5 rounded-lg text-lg font-semibold hover:bg-sky-50 transition-colors inline-flex items-center gap-2"
             >
               Schedule Demo
