@@ -5,15 +5,9 @@ import {
   Routes,
   Navigate,
 } from 'react-router-dom';
-import Index from './components/Main/Index';
-import SingleView from './components/View/SSR/Single/SingleView';
-import DualView from './components/View/SSR/Dual/DualView';
-import CsrSingleView from './components/View/CSR/Single/CsrSingleView';
-import CsrDualView from './components/View/CSR/Dual/CsrDualView';
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Landing2 from './components/Main/Landing2';
-import Viewer from './pages/Viewer';
+import Login from 'pages/Login';
+import Home from 'pages/Home';
+import Viewer from 'pages/Viewer';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -28,33 +22,7 @@ function App() {
           path="/"
           element={requireAuth && !token ? <Navigate to="/login" /> : <Home />}
         />
-        <Route path="/landing1" element={<Home />} />
-        <Route path="/landing2" element={<Landing2 />} />
         <Route path="/viewer" element={<Viewer />} />
-        <Route
-          path="/dual-view"
-          element={
-            requireAuth && !token ? <Navigate to="/login" /> : <DualView />
-          }
-        />
-        <Route
-          path="/single-view"
-          element={
-            requireAuth && !token ? <Navigate to="/login" /> : <SingleView />
-          }
-        />
-        <Route
-          path="/webgl/single-view"
-          element={
-            requireAuth && !token ? <Navigate to="/login" /> : <CsrSingleView />
-          }
-        />
-        <Route
-          path="/webgl/dual-view"
-          element={
-            requireAuth && !token ? <Navigate to="/login" /> : <CsrDualView />
-          }
-        />
       </Routes>
     </Router>
   );
