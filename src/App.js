@@ -10,7 +10,7 @@ import SingleView from './components/View/SSR/Single/SingleView';
 import DualView from './components/View/SSR/Dual/DualView';
 import CsrSingleView from './components/View/CSR/Single/CsrSingleView';
 import CsrDualView from './components/View/CSR/Dual/CsrDualView';
-import Login from './components/Login/Login';
+import Login from './pages/Login';
 import Landing from './components/Main/Landing';
 import Landing2 from './components/Main/Landing2';
 import RenderingPage from './components/View/CSR/UnifiedView/UnifiedCsrView';
