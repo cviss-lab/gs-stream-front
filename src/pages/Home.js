@@ -13,7 +13,7 @@ import {
   Compass,
 } from 'lucide-react';
 
-export default function LandingPage() {
+export default function Home() {
   const features = [
     {
       icon: <Navigation className="w-8 h-8 text-sky-600" />,

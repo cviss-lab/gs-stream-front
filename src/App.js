@@ -11,7 +11,7 @@ import DualView from './components/View/SSR/Dual/DualView';
 import CsrSingleView from './components/View/CSR/Single/CsrSingleView';
 import CsrDualView from './components/View/CSR/Dual/CsrDualView';
 import Login from './pages/Login';
-import Landing from './components/Main/Landing';
+import Home from './pages/Home';
 import Landing2 from './components/Main/Landing2';
 import RenderingPage from './components/View/CSR/UnifiedView/UnifiedCsrView';
 
@@ -26,11 +26,9 @@ function App() {
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route
           path="/"
-          element={
-            requireAuth && !token ? <Navigate to="/login" /> : <Landing />
-          }
+          element={requireAuth && !token ? <Navigate to="/login" /> : <Home />}
         />
-        <Route path="/landing1" element={<Landing />} />
+        <Route path="/landing1" element={<Home />} />
         <Route path="/landing2" element={<Landing2 />} />
         <Route path="/render" element={<RenderingPage />} />
         <Route
