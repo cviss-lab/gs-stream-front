@@ -4,8 +4,8 @@ import ObjectSelection from './controls/ObjectSelection';
 import AiFunctions from './controls/AiFunctions';
 
 function ControlPanel({
-  selectedObjects,
-  onObjectSelection,
+  selectedModelIds,
+  onModelSelection,
   aiFunctions,
   onAiFunctionChange,
   searchTerm,
@@ -19,8 +19,8 @@ function ControlPanel({
       </h2>
 
       <ObjectSelection
-        selectedObjects={selectedObjects}
-        onObjectSelection={onObjectSelection}
+        selectedModelIds={selectedModelIds}
+        onModelSelection={onModelSelection}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         allModels={allModels}

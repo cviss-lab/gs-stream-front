@@ -29,7 +29,7 @@ const handleRotate = (axis, direction, refs) => {
 };
 
 function UnifiedCsrView() {
-  const [selectedObjects, setSelectedObjects] = useState([]);
+  const [selectedModelIds, setSelectedModelIds] = useState([]);
   const [aiFunctions, setAiFunctions] = useState({
     measurement: false,
     annotation: false,
@@ -58,8 +58,8 @@ function UnifiedCsrView() {
     return `${backendAddress}/api/assets/splat/${modelId}`;
   };
 
-  const handleObjectSelection = (modelId) => {
-    setSelectedObjects((prev) =>
+  const handleModelSelection = (modelId) => {
+    setSelectedModelIds((prev) =>
       prev.includes(modelId)
         ? prev.filter((id) => id !== modelId)
         : prev.length < 2
@@ -91,8 +91,8 @@ function UnifiedCsrView() {
       <TopNavigation />
       <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
         <ControlPanel
-          selectedObjects={selectedObjects}
-          onObjectSelection={handleObjectSelection}
+          selectedModelIds={selectedModelIds}
+          onModelSelection={handleModelSelection}
           aiFunctions={aiFunctions}
           onAiFunctionChange={handleAiFunctionChange}
           searchTerm={searchTerm}
@@ -101,7 +101,7 @@ function UnifiedCsrView() {
         />
         <div className="flex-1 p-4 flex flex-col">
           <RenderArea
-            selectedObjects={selectedObjects}
+            selectedModelIds={selectedModelIds}
             allModels={allModels}
             cameraControlsRef1={cameraControlsRef1}
             cameraControlsRef2={cameraControlsRef2}
@@ -110,7 +110,7 @@ function UnifiedCsrView() {
             rotationDelta={rotationDelta}
             cameraSettings={cameraSettings}
           />
-          {selectedObjects.length > 0 && (
+          {selectedModelIds.length > 0 && (
             <CameraControlPanel
               delta={delta}
               setDelta={setDelta}

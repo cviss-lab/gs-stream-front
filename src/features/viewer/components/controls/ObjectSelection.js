@@ -3,8 +3,8 @@ import { TextField, Button, Checkbox, Box, Tooltip } from '@mui/material';
 import { Search } from 'lucide-react';
 
 function ObjectSelection({
-  selectedObjects,
-  onObjectSelection,
+  selectedModelIds,
+  onModelSelection,
   searchTerm,
   setSearchTerm,
   allModels,
@@ -46,8 +46,8 @@ function ObjectSelection({
             .map((model) => (
               <div key={model.id} className="flex items-center py-1">
                 <Checkbox
-                  checked={selectedObjects.includes(model.id)}
-                  onChange={() => onObjectSelection(model.id)}
+                  checked={selectedModelIds.includes(model.id)}
+                  onChange={() => onModelSelection(model.id)}
                   aria-label={`Select ${model.name}`}
                 />
                 <label className="ml-2">{model.name}</label>
