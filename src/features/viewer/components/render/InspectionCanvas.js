@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef, useMemo } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import CameraControls from './camera/CameraControls';
 import SplatComponent from './splat/SplatComponent';
@@ -21,14 +21,17 @@ const CsrCanvas = forwardRef(
   ) => {
     const [keysPressed, setKeysPressed] = useState({});
     const [cameraPose, setCameraPose] = useState({
-      position: { x: 0, y: 0, z: 0 },
-      rotation: { x: 0, y: 0, z: 0 },
+      position: {
+        x: cameraSettings.position[0],
+        y: cameraSettings.position[1],
+        z: cameraSettings.position[2],
+      },
+      rotation: {
+        x: cameraSettings.rotation[0],
+        y: cameraSettings.rotation[1],
+        z: cameraSettings.rotation[2],
+      },
     });
-
-    useEffect(() => {
-      console.log('splatUrl:', splatUrl);
-      console.log('modelPosition:', modelPosition);
-    }, [splatUrl, modelPosition]);
 
     useEffect(() => {
       const handleKeyDown = (event) => {
@@ -48,16 +51,11 @@ const CsrCanvas = forwardRef(
       };
     }, []);
 
-    const initialRotation = useMemo(
-      () => ({ x: -115.29, y: 48.02, z: 152.66 }),
-      [],
-    );
-
     return (
       <div className="w-full h-full relative">
         <KeyDisplay keysPressed={keysPressed} />
 
-        {/* Camera Pose 출력 부분 */}
+        {/* Camera Pose Display */}
         <div className="absolute top-0 right-0 p-2 bg-white bg-opacity-75 rounded z-10">
           <h3 className="text-sm font-semibold">Camera Pose</h3>
           <p className="text-xs">
@@ -75,12 +73,12 @@ const CsrCanvas = forwardRef(
         <Canvas
           className="w-full h-full bg-background"
           gl={{ antialias: false }}
-          dpr={window.devicePixelRatio || 1} // 향상된 렌더링 품질
+          dpr={window.devicePixelRatio || 1}
           camera={cameraSettings}
         >
           <axesHelper args={[5]} />
           <CameraControls
-            ref={ref} // Forward the ref to CameraControls
+            ref={ref}
             keysPressed={keysPressed}
             delta={delta}
             rotationDelta={rotationDelta}
@@ -88,8 +86,7 @@ const CsrCanvas = forwardRef(
             maxPanY={maxPanY}
             maxPanZ={maxPanZ}
             setCameraPose={setCameraPose}
-            initialPosition={cameraSettings.position}
-            initialRotation={initialRotation} // 메모이제이션된 객체 전달
+            cameraSettings={cameraSettings}
           />
           <SplatComponent
             maxSplats={20000000}

@@ -8,7 +8,7 @@ import RenderArea from 'features/viewer/components/RenderArea';
 import TopNavigation from 'features/viewer/components/TopNavigation';
 
 // Constants
-import { DUAL_VIEW_SETTINGS } from 'features/viewer/constants/viewerSettings';
+import { DEFAULT_VIEW_SETTINGS } from 'features/viewer/constants/viewerSettings';
 import { TEST_MODELS } from '__mocks__/models';
 
 // Custom hooks
@@ -36,16 +36,15 @@ function UnifiedCsrView() {
     segmentation: false,
   });
   const [searchTerm, setSearchTerm] = useState('');
-  const [delta, setDelta] = useState(DUAL_VIEW_SETTINGS.delta);
+  const [delta, setDelta] = useState(DEFAULT_VIEW_SETTINGS.delta);
   const [rotationDelta, setRotationDelta] = useState(
-    DUAL_VIEW_SETTINGS.rotationDelta,
+    DEFAULT_VIEW_SETTINGS.rotationDelta,
   );
 
-  // Constants to distinguish between standalone mode and normal mode
+  // Check if running in standalone mode
   const isStandalone = process.env.REACT_APP_STANDALONE === 'true';
   const backendAddress = isStandalone ? '' : process.env.REACT_APP_BACKEND_URL;
 
-  // Use local test data in standalone mode
   const { allModels } = useModelData(backendAddress, isStandalone);
   const { cameraControlsRef1, cameraControlsRef2, handleResetCamera } =
     useCameraControls();
@@ -75,16 +74,41 @@ function UnifiedCsrView() {
     }));
   };
 
-  const cameraSettings = useMemo(
-    () => ({
-      position: [17.46, 65.26, 16.1],
-      rotation: [-115.29, 48.02, 152.66],
-      fov: 75,
-      near: 0.05,
-      far: 1000,
-    }),
-    [],
-  );
+  const selectedModels = useMemo(() => {
+    return selectedModelIds
+      .map((id) => {
+        const model = allModels.find((m) => m.id === id);
+        if (!model) return null;
+
+        const viewSettings = model.viewSettings || DEFAULT_VIEW_SETTINGS;
+        return {
+          id: model.id,
+          splatUrl: getWebglModelUrl(model.id),
+          renderSettings: {
+            camera: model.viewSettings?.camera
+              ? {
+                  position: viewSettings.camera.position,
+                  rotation: viewSettings.camera.rotation,
+                  fov: viewSettings.camera.fov,
+                  near: viewSettings.camera.near,
+                  far: viewSettings.camera.far,
+                }
+              : DEFAULT_VIEW_SETTINGS.cameraSettings,
+            model: {
+              position:
+                viewSettings.modelPosition ||
+                DEFAULT_VIEW_SETTINGS.modelPosition,
+              maxPan: {
+                x: viewSettings.maxPanX || DEFAULT_VIEW_SETTINGS.maxPanX,
+                y: viewSettings.maxPanY || DEFAULT_VIEW_SETTINGS.maxPanY,
+                z: viewSettings.maxPanZ || DEFAULT_VIEW_SETTINGS.maxPanZ,
+              },
+            },
+          },
+        };
+      })
+      .filter(Boolean);
+  }, [selectedModelIds, allModels]);
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
@@ -101,14 +125,11 @@ function UnifiedCsrView() {
         />
         <div className="flex-1 p-4 flex flex-col">
           <RenderArea
-            selectedModelIds={selectedModelIds}
-            allModels={allModels}
+            selectedModels={selectedModels}
             cameraControlsRef1={cameraControlsRef1}
             cameraControlsRef2={cameraControlsRef2}
-            getWebglModelUrl={getWebglModelUrl}
             delta={delta}
             rotationDelta={rotationDelta}
-            cameraSettings={cameraSettings}
           />
           {selectedModelIds.length > 0 && (
             <CameraControlPanel
