@@ -12,4 +12,4 @@ node_modules/
 # System files and others
 .DS_Store
 .coverage
-
+*.splat
