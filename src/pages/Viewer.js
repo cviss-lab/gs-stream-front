@@ -9,6 +9,7 @@ import TopNavigation from 'features/viewer/components/TopNavigation';
 
 // Constants
 import { DUAL_VIEW_SETTINGS } from 'features/viewer/constants/viewerSettings';
+import { TEST_MODELS } from '__mocks__/models';
 
 // Custom hooks
 import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
@@ -40,13 +41,22 @@ function UnifiedCsrView() {
     DUAL_VIEW_SETTINGS.rotationDelta,
   );
 
-  const backendCsrAddress = process.env.REACT_APP_BACKEND_URL;
-  const { allModels } = useModelData(backendCsrAddress);
+  // Constants to distinguish between standalone mode and normal mode
+  const isStandalone = process.env.REACT_APP_STANDALONE === 'true';
+  const backendAddress = isStandalone ? '' : process.env.REACT_APP_BACKEND_URL;
+
+  // Use local test data in standalone mode
+  const { allModels } = useModelData(backendAddress, isStandalone);
   const { cameraControlsRef1, cameraControlsRef2, handleResetCamera } =
     useCameraControls();
 
-  const getWebglModelUrl = (modelId) =>
-    `${backendCsrAddress}/api/assets/splat/${modelId}`;
+  const getWebglModelUrl = (modelId) => {
+    if (isStandalone) {
+      const model = TEST_MODELS.find((model) => model.id === modelId);
+      return model ? `/test-models/${model.file}` : null;
+    }
+    return `${backendAddress}/api/assets/splat/${modelId}`;
+  };
 
   const handleObjectSelection = (modelId) => {
     setSelectedObjects((prev) =>
