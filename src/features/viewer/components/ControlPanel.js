@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import ObjectSelection from './controls/ObjectSelection';
+import ModelSelector from './controls/ModelSelector';
 import AiFunctions from './controls/AiFunctions';
 
 function ControlPanel({
@@ -18,7 +18,7 @@ function ControlPanel({
         Control Panel
       </h2>
 
-      <ObjectSelection
+      <ModelSelector
         selectedModelIds={selectedModelIds}
         onModelSelection={onModelSelection}
         searchTerm={searchTerm}

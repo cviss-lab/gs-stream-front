@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, Button, Checkbox, Box, Tooltip } from '@mui/material';
 import { Search } from 'lucide-react';
 
-function ObjectSelection({
+function ModelSelector({
   selectedModelIds,
   onModelSelection,
   searchTerm,
@@ -59,4 +59,4 @@ function ObjectSelection({
   );
 }
 
-export default ObjectSelection;
+export default ModelSelector;
