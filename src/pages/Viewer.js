@@ -40,7 +40,7 @@ function UnifiedCsrView() {
     DUAL_VIEW_SETTINGS.rotationDelta,
   );
 
-  const backendCsrAddress = process.env.REACT_APP_CSR_BACKEND_URL;
+  const backendCsrAddress = process.env.REACT_APP_BACKEND_URL;
   const { allModels } = useModelData(backendCsrAddress);
   const { cameraControlsRef1, cameraControlsRef2, handleResetCamera } =
     useCameraControls();
