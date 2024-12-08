@@ -7,8 +7,7 @@ docker-build-*
 
 # Package and environment settings
 node_modules/
-.env
-.env.development
+.env*
 
 # System files and others
 .DS_Store
