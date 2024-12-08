@@ -61,5 +61,5 @@
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.14"
   },
-  "homepage": "https://kyungwanhan.github.io/gs-stream-front"
+  "homepage": "."
 }

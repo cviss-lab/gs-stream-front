@@ -9,6 +9,7 @@ import {
   Navigation,
   Compass,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const features = [
@@ -75,13 +76,13 @@ export default function Home() {
             >
               Solutions
             </a>
-            <a
-              href="/viewer"
+            <Link
+              to="/viewer"
               className="bg-sky-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-sky-700 transition-all shadow-lg hover:shadow-sky-200 inline-flex items-center gap-2"
             >
               Get Started
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </nav>
       </header>
@@ -108,13 +109,13 @@ export default function Home() {
                 autonomous drone system, powered by 5G connectivity and advanced
                 AI analytics.
               </p>
-              <a
-                href="/viewer"
+              <Link
+                to="/viewer"
                 className="bg-sky-600 text-white px-6 py-3 rounded-xl text-lg font-semibold hover:bg-sky-700 transition-all shadow-xl hover:shadow-sky-200 inline-flex items-center gap-2"
               >
                 Launch Inspection
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -183,13 +184,13 @@ export default function Home() {
               Join the revolution in telecom infrastructure maintenance with our
               5G-powered drone inspection system.
             </p>
-            <a
-              href="/viewer"
+            <Link
+              to="/viewer"
               className="bg-white text-sky-600 px-6 py-2.5 rounded-lg text-lg font-semibold hover:bg-sky-50 transition-colors inline-flex items-center gap-2"
             >
               Schedule Demo
               <ArrowRight className="w-5 h-5" />
-            </a>
+            </Link>
           </div>
         </section>
       </main>

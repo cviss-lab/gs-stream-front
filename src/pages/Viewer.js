@@ -52,7 +52,9 @@ function UnifiedCsrView() {
   const getWebglModelUrl = (modelId) => {
     if (isStandalone) {
       const model = TEST_MODELS.find((model) => model.id === modelId);
-      return model ? `/test-models/${model.file}` : null;
+      return model
+        ? `${process.env.PUBLIC_URL}/test-models/${model.file}`
+        : null;
     }
     return `${backendAddress}/api/assets/splat/${modelId}`;
   };
