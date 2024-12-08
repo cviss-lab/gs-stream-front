@@ -12,4 +12,5 @@ export const keyActions = {
   KeyK: 'Rotate camera up (decrease polar angle)',
   KeyI: 'Rotate camera down (increase polar angle)',
   KeyR: 'Reset Camera',
+  KeyF: 'Toggle Ego Drone',
 };

@@ -4,7 +4,7 @@ import CameraControls from './camera/CameraControls';
 import SplatComponent from './splat/SplatComponent';
 import { Environment } from '@react-three/drei';
 import KeyDisplay from './camera/KeyDisplay';
-
+import EgoDrone from './three/EgoDrone';
 const CsrCanvas = forwardRef(
   (
     {
@@ -96,6 +96,7 @@ const CsrCanvas = forwardRef(
             splatUrl={splatUrl}
           />
           <Environment preset="city" />
+          <EgoDrone />
         </Canvas>
       </div>
     );
