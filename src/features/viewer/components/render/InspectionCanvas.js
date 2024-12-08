@@ -5,7 +5,7 @@ import SplatComponent from './splat/SplatComponent';
 import { Environment } from '@react-three/drei';
 import KeyDisplay from './camera/KeyDisplay';
 import EgoDrone from './three/EgoDrone';
-const CsrCanvas = forwardRef(
+const InspectionCanvas = forwardRef(
   (
     {
       delta,
@@ -103,4 +103,6 @@ const CsrCanvas = forwardRef(
   },
 );
 
-export default CsrCanvas;
+InspectionCanvas.displayName = 'InspectionCanvas';
+
+export default InspectionCanvas;
