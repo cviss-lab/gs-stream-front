@@ -7,6 +7,7 @@ function RenderArea({
   cameraControlsRef2,
   delta,
   rotationDelta,
+  showDrone,
 }) {
   return (
     <div
@@ -30,6 +31,7 @@ function RenderArea({
                     : cameraControlsRef2
                   : null
             }
+            showDrone={showDrone}
             splatUrl={model.splatUrl}
             delta={delta}
             rotationDelta={rotationDelta}

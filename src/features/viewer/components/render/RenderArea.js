@@ -10,6 +10,7 @@ function RenderArea({
   delta,
   rotationDelta,
   cameraSettings,
+  showDrone,
 }) {
   return (
     <div
@@ -44,6 +45,7 @@ function RenderArea({
               maxPanY={200}
               maxPanZ={200}
               cameraSettings={cameraSettings}
+              showDrone={showDrone}
             />
           </div>
         ))}

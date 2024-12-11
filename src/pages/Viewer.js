@@ -40,6 +40,7 @@ function UnifiedCsrView() {
   const [rotationDelta, setRotationDelta] = useState(
     DEFAULT_VIEW_SETTINGS.rotationDelta,
   );
+  const [showDrone, setShowDrone] = useState(false);
 
   // Check if running in standalone mode
   const isStandalone = process.env.REACT_APP_STANDALONE === 'true';
@@ -124,6 +125,8 @@ function UnifiedCsrView() {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           allModels={allModels}
+          showDrone={showDrone}
+          setShowDrone={setShowDrone}
         />
         <div className="flex-1 p-4 flex flex-col">
           <RenderArea
@@ -132,6 +135,7 @@ function UnifiedCsrView() {
             cameraControlsRef2={cameraControlsRef2}
             delta={delta}
             rotationDelta={rotationDelta}
+            showDrone={showDrone}
           />
           {selectedModelIds.length > 0 && (
             <CameraControlPanel

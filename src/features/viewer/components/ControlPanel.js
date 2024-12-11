@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, FormControlLabel, Checkbox } from '@mui/material';
 import ModelSelector from './controls/ModelSelector';
 import AiFunctions from './controls/AiFunctions';
+import Tools from './controls/Tools';
 
 function ControlPanel({
   selectedModelIds,
@@ -11,6 +12,8 @@ function ControlPanel({
   searchTerm,
   setSearchTerm,
   allModels,
+  showDrone,
+  setShowDrone,
 }) {
   return (
     <Box className="w-full lg:w-1/5 min-w-[250px] p-4 bg-white shadow-md overflow-auto">
@@ -30,6 +33,8 @@ function ControlPanel({
         aiFunctions={aiFunctions}
         onAiFunctionChange={onAiFunctionChange}
       />
+
+      <Tools showDrone={showDrone} setShowDrone={setShowDrone} />
     </Box>
   );
 }

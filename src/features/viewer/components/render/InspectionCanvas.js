@@ -16,6 +16,7 @@ const InspectionCanvas = forwardRef(
       maxPanY,
       maxPanZ,
       cameraSettings,
+      showDrone,
     },
     ref,
   ) => {
@@ -50,7 +51,6 @@ const InspectionCanvas = forwardRef(
         window.removeEventListener('keyup', handleKeyUp);
       };
     }, []);
-
     return (
       <div className="w-full h-full relative">
         <KeyDisplay keysPressed={keysPressed} />
@@ -96,7 +96,7 @@ const InspectionCanvas = forwardRef(
             splatUrl={splatUrl}
           />
           <Environment preset="city" />
-          <EgoDrone />
+          {showDrone && <EgoDrone />}
         </Canvas>
       </div>
     );

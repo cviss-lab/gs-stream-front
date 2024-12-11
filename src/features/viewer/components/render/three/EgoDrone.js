@@ -10,7 +10,7 @@ const EgoDrone = () => {
   const { scene } = useGLTF(DRONE_MODEL_PATH, true);
   const { camera } = useThree();
   const droneRef = useRef();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (!scene) {
