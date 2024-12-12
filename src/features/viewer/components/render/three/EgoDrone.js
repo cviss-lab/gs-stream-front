@@ -4,6 +4,8 @@ import { useThree } from '@react-three/fiber';
 
 const DRONE_MODEL_PATH =
   process.env.PUBLIC_URL + '/model/drone_sample_centered.glb';
+const DRONE_SCALE = 20;
+const TOGGLE_KEY = 'KeyF';
 
 const EgoDrone = () => {
   const [model, setModel] = useState(null);
@@ -17,13 +19,24 @@ const EgoDrone = () => {
       console.error('Failed to load drone model');
       return;
     }
-    const clonedScene = scene.clone();
-    setModel(clonedScene);
+    try {
+      const clonedScene = scene.clone();
+      setModel(clonedScene);
+    } catch (error) {
+      console.error('Error cloning drone model:', error);
+    }
   }, [scene]);
 
   useEffect(() => {
+    if (droneRef.current) {
+      droneRef.current.position.copy(camera.position);
+      droneRef.current.rotation.copy(camera.rotation);
+    }
+  }, [camera, model]);
+
+  useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.code === 'KeyF') {
+      if (event.code === TOGGLE_KEY) {
         setIsVisible((prev) => !prev);
         if (droneRef.current) {
           droneRef.current.position.copy(camera.position);
@@ -41,13 +54,12 @@ const EgoDrone = () => {
   }
 
   return (
-    <mesh ref={droneRef} visible={isVisible} scale={2}>
+    <mesh ref={droneRef} visible={isVisible} scale={DRONE_SCALE}>
       <primitive object={model} />
     </mesh>
   );
 };
 
-// Preload model but don't share instances
 useGLTF.preload(DRONE_MODEL_PATH);
 
 export default EgoDrone;
