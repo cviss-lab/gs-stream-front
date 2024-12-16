@@ -1,5 +1,5 @@
 # .github/workflows/dev.yml
-name: Deploy Development(dev branch) to GitHub Pages
+name: Deploy Development(main branch) to GitHub Pages
 
 on:
   # Trigger the workflow on push events targeting the dev branch

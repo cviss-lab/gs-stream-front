@@ -36,4 +36,40 @@ export const TEST_MODELS = [
     },
   },
   { id: '103', name: 'RCH', file: 'rch.splat' },
+  {
+    id: '104',
+    name: 'st_comb/st_1a',
+    file: 'ST_1_antialiased.splat',
+    viewSettings: {
+      camera: {
+        position: [-24.24, -8.12, -7.82],
+        rotation: [-92.05, -47.13, -4.72],
+        fov: 75,
+        near: 0.1,
+        far: 1000,
+      },
+      modelPosition: [0, 0, 0],
+      maxPanX: 200,
+      maxPanY: 200,
+      maxPanZ: 200,
+    },
+  },
+  {
+    id: '105',
+    name: 'st_comb/st_2a',
+    file: 'ST_2_antialiased.splat',
+    viewSettings: {
+      camera: {
+        position: [-24.24, -8.12, -7.82],
+        rotation: [-92.05, -47.13, -4.72],
+        fov: 75,
+        near: 0.05,
+        far: 1000,
+      },
+      modelPosition: [0, 0, 0],
+      maxPanX: 200,
+      maxPanY: 200,
+      maxPanZ: 200,
+    },
+  },
 ];
