@@ -31,18 +31,12 @@ function RenderArea({
                     : cameraControlsRef2
                   : null
             }
+            model={model}
+            controls={{
+              delta,
+              rotationDelta,
+            }}
             showDrone={showDrone}
-            splatUrl={model.splatUrl}
-            delta={delta}
-            rotationDelta={rotationDelta}
-            modelPosition={model.renderSettings.model.position}
-            maxPanX={model.renderSettings.model.maxPan.x}
-            maxPanY={model.renderSettings.model.maxPan.y}
-            maxPanZ={model.renderSettings.model.maxPan.z}
-            cameraSettings={(() => {
-              console.log('Camera Settings:', model.renderSettings.camera);
-              return model.renderSettings.camera;
-            })()}
           />
         </div>
       ))}
