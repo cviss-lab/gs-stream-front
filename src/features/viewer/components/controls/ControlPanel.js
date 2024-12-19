@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, FormControlLabel, Checkbox } from '@mui/material';
-import ModelSelector from './controls/ModelSelector';
-import AiFunctions from './controls/AiFunctions';
-import Tools from './controls/Tools';
+import ModelSelector from './ModelSelector';
+import AiFunctions from './AiFunctions';
+import Tools from './Tools';
 
 function ControlPanel({
   selectedModelIds,
