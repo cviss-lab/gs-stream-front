@@ -7,15 +7,13 @@ import ControlPanel from 'features/viewer/components/controls/ControlPanel';
 import RenderArea from 'features/viewer/components/render/RenderArea';
 import TopNavigation from 'features/viewer/components/controls/TopNavigation';
 
-// Constants
-import { DEFAULT_VIEW_SETTINGS } from 'features/viewer/constants/viewerSettings';
-
 // Custom hooks
 import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
 import { useModelData } from 'features/viewer/hooks/useModelData';
 import { useModelSelection } from 'features/viewer/hooks/useModelSelection';
 import { useAIFunctions } from 'features/viewer/hooks/useAIFunctions';
 import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
+import { useViewSettings } from 'features/viewer/hooks/useViewSettings';
 
 function Viewer() {
   // Check if running in standalone mode
@@ -34,14 +32,12 @@ function Viewer() {
     getWebglModelUrl,
   );
 
-  const [viewSettings, setViewSettings] = useState(DEFAULT_VIEW_SETTINGS);
-
-  const updateViewSettings = (key, value) => {
-    setViewSettings((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
+  const {
+    displaySettings,
+    cameraSettings,
+    updateDisplaySettings,
+    updateCameraSettings,
+  } = useViewSettings();
 
   const {
     cameraControlsRef1,
@@ -54,34 +50,34 @@ function Viewer() {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       <TopNavigation />
-      <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden">
         <ControlPanel
           selectedModelIds={selectedModelIds}
           onModelSelection={handleModelSelection}
           aiFunctions={aiFunctions}
           onAiFunctionChange={handleAiFunctionChange}
-          searchTerm={viewSettings.searchTerm}
-          setSearchTerm={(value) => updateViewSettings('searchTerm', value)}
+          searchTerm={displaySettings.searchTerm}
+          setSearchTerm={(value) => updateDisplaySettings('searchTerm', value)}
+          showDrone={displaySettings.showDrone}
+          setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
           allModels={allModels}
-          showDrone={viewSettings.showDrone}
-          setShowDrone={(value) => updateViewSettings('showDrone', value)}
         />
-        <div className="flex-1 p-4 flex flex-col">
+        <div className="flex-1 flex flex-col">
           <RenderArea
             selectedModels={selectedModels}
             cameraControlsRef1={cameraControlsRef1}
             cameraControlsRef2={cameraControlsRef2}
-            delta={viewSettings.delta}
-            rotationDelta={viewSettings.rotationDelta}
-            showDrone={viewSettings.showDrone}
+            delta={cameraSettings.delta}
+            rotationDelta={cameraSettings.rotationDelta}
+            showDrone={displaySettings.showDrone}
           />
           {selectedModelIds.length > 0 && (
             <CameraControlPanel
-              delta={viewSettings.delta}
-              setDelta={(value) => updateViewSettings('delta', value)}
-              rotationDelta={viewSettings.rotationDelta}
+              delta={cameraSettings.delta}
+              setDelta={(value) => updateCameraSettings('delta', value)}
+              rotationDelta={cameraSettings.rotationDelta}
               setRotationDelta={(value) =>
-                updateViewSettings('rotationDelta', value)
+                updateCameraSettings('rotationDelta', value)
               }
               handleMove={handleMove}
               handleRotate={handleRotate}
