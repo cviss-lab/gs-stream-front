@@ -17,19 +17,6 @@ import { useModelSelection } from 'features/viewer/hooks/useModelSelection';
 import { useAIFunctions } from 'features/viewer/hooks/useAIFunctions';
 import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
 
-// Helper functions
-const handleMove = (axis, direction, refs) => {
-  refs.forEach((ref) => {
-    if (ref.current) ref.current.move(axis, direction);
-  });
-};
-
-const handleRotate = (axis, direction, refs) => {
-  refs.forEach((ref) => {
-    if (ref.current) ref.current.rotate(axis, direction);
-  });
-};
-
 function Viewer() {
   // Check if running in standalone mode
   const isStandalone = process.env.REACT_APP_STANDALONE === 'true';
@@ -54,8 +41,13 @@ function Viewer() {
   );
   const [showDrone, setShowDrone] = useState(false);
 
-  const { cameraControlsRef1, cameraControlsRef2, handleResetCamera } =
-    useCameraControls();
+  const {
+    cameraControlsRef1,
+    cameraControlsRef2,
+    handleMove,
+    handleRotate,
+    handleResetCamera,
+  } = useCameraControls();
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
