@@ -1,5 +1,5 @@
 // React related imports
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 
 // Component imports
 import CameraControlPanel from 'features/viewer/components/controls/CameraControlPanel';
@@ -9,11 +9,13 @@ import TopNavigation from 'features/viewer/components/controls/TopNavigation';
 
 // Constants
 import { DEFAULT_VIEW_SETTINGS } from 'features/viewer/constants/viewerSettings';
-import { TEST_MODELS } from '__mocks__/models';
 
 // Custom hooks
 import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
 import { useModelData } from 'features/viewer/hooks/useModelData';
+import { useModelSelection } from 'features/viewer/hooks/useModelSelection';
+import { useAIFunctions } from 'features/viewer/hooks/useAIFunctions';
+import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
 
 // Helper functions
 const handleMove = (axis, direction, refs) => {
@@ -33,12 +35,18 @@ function Viewer() {
   const isStandalone = process.env.REACT_APP_STANDALONE === 'true';
   const backendAddress = isStandalone ? '' : process.env.REACT_APP_BACKEND_URL;
 
-  const [selectedModelIds, setSelectedModelIds] = useState([]);
-  const [aiFunctions, setAiFunctions] = useState({
-    measurement: false,
-    annotation: false,
-    segmentation: false,
-  });
+  const { selectedModelIds, handleModelSelection } = useModelSelection();
+  const { aiFunctions, handleAiFunctionChange } = useAIFunctions();
+  const { allModels, getWebglModelUrl } = useModelData(
+    backendAddress,
+    isStandalone,
+  );
+  const { selectedModels } = useModelRendering(
+    selectedModelIds,
+    allModels,
+    getWebglModelUrl,
+  );
+
   const [searchTerm, setSearchTerm] = useState('');
   const [delta, setDelta] = useState(DEFAULT_VIEW_SETTINGS.delta);
   const [rotationDelta, setRotationDelta] = useState(
@@ -46,75 +54,8 @@ function Viewer() {
   );
   const [showDrone, setShowDrone] = useState(false);
 
-  const { allModels } = useModelData(backendAddress, isStandalone);
   const { cameraControlsRef1, cameraControlsRef2, handleResetCamera } =
     useCameraControls();
-
-  const getWebglModelUrl = (modelId) => {
-    if (isStandalone) {
-      const model = TEST_MODELS.find((model) => model.id === modelId);
-      return model
-        ? `${process.env.PUBLIC_URL}/test-models/${model.file}`
-        : null;
-    }
-    return `${backendAddress}/api/assets/splat/${modelId}`;
-  };
-
-  const handleModelSelection = (modelId) => {
-    setSelectedModelIds((prev) =>
-      prev.includes(modelId)
-        ? prev.filter((id) => id !== modelId)
-        : prev.length < 2
-          ? [...prev, modelId]
-          : prev,
-    );
-  };
-
-  const handleAiFunctionChange = (functionName) => {
-    setAiFunctions((prev) => ({
-      ...prev,
-      [functionName]: !prev[functionName],
-    }));
-  };
-
-  const createModelRenderSettings = (model, viewSettings) => {
-    return {
-      camera: model.viewSettings?.camera
-        ? {
-            position: viewSettings.camera.position,
-            rotation: viewSettings.camera.rotation,
-            fov: viewSettings.camera.fov,
-            near: viewSettings.camera.near,
-            far: viewSettings.camera.far,
-          }
-        : DEFAULT_VIEW_SETTINGS.cameraSettings,
-      model: {
-        position:
-          viewSettings.modelPosition || DEFAULT_VIEW_SETTINGS.modelPosition,
-        maxPan: {
-          x: viewSettings.maxPanX || DEFAULT_VIEW_SETTINGS.maxPanX,
-          y: viewSettings.maxPanY || DEFAULT_VIEW_SETTINGS.maxPanY,
-          z: viewSettings.maxPanZ || DEFAULT_VIEW_SETTINGS.maxPanZ,
-        },
-      },
-    };
-  };
-
-  const selectedModels = useMemo(() => {
-    return selectedModelIds
-      .map((id) => {
-        const model = allModels.find((m) => m.id === id);
-        if (!model) return null;
-
-        const viewSettings = model.viewSettings || DEFAULT_VIEW_SETTINGS;
-        return {
-          id: model.id,
-          splatUrl: getWebglModelUrl(model.id),
-          renderSettings: createModelRenderSettings(model, viewSettings),
-        };
-      })
-      .filter(Boolean);
-  }, [selectedModelIds, allModels]);
 
   return (
     <div className="flex flex-col h-screen bg-gray-100">
