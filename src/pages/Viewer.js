@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import CameraControlPanel from 'features/viewer/components/controls/CameraControlPanel';
 import ControlPanel from 'features/viewer/components/controls/ControlPanel';
 import RenderArea from 'features/viewer/components/render/RenderArea';
-import TopNavigation from 'features/viewer/components/controls/TopNavigation';
 
 // Custom hooks
 import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
@@ -14,6 +13,9 @@ import { useModelSelection } from 'features/viewer/hooks/useModelSelection';
 import { useAIFunctions } from 'features/viewer/hooks/useAIFunctions';
 import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
 import { useViewSettings } from 'features/viewer/hooks/useViewSettings';
+
+// Layout imports
+import { ViewerLayout } from 'features/viewer/layouts/ViewerLayout';
 
 function Viewer() {
   // Check if running in standalone mode
@@ -47,49 +49,49 @@ function Viewer() {
     handleResetCamera,
   } = useCameraControls();
 
-  return (
-    <div className="flex flex-col h-screen bg-gray-100">
-      <TopNavigation />
-      <div className="flex flex-1 overflow-hidden">
-        <ControlPanel
-          selectedModelIds={selectedModelIds}
-          onModelSelection={handleModelSelection}
-          aiFunctions={aiFunctions}
-          onAiFunctionChange={handleAiFunctionChange}
-          searchTerm={displaySettings.searchTerm}
-          setSearchTerm={(value) => updateDisplaySettings('searchTerm', value)}
-          showDrone={displaySettings.showDrone}
-          setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
-          allModels={allModels}
+  const leftPanel = (
+    <ControlPanel
+      selectedModelIds={selectedModelIds}
+      onModelSelection={handleModelSelection}
+      aiFunctions={aiFunctions}
+      onAiFunctionChange={handleAiFunctionChange}
+      searchTerm={displaySettings.searchTerm}
+      setSearchTerm={(value) => updateDisplaySettings('searchTerm', value)}
+      showDrone={displaySettings.showDrone}
+      setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
+      allModels={allModels}
+    />
+  );
+
+  const mainContent = (
+    <div className="flex-1 flex flex-col">
+      <RenderArea
+        selectedModels={selectedModels}
+        cameraControlsRef1={cameraControlsRef1}
+        cameraControlsRef2={cameraControlsRef2}
+        delta={cameraSettings.delta}
+        rotationDelta={cameraSettings.rotationDelta}
+        showDrone={displaySettings.showDrone}
+      />
+      {selectedModelIds.length > 0 && (
+        <CameraControlPanel
+          delta={cameraSettings.delta}
+          setDelta={(value) => updateCameraSettings('delta', value)}
+          rotationDelta={cameraSettings.rotationDelta}
+          setRotationDelta={(value) =>
+            updateCameraSettings('rotationDelta', value)
+          }
+          handleMove={handleMove}
+          handleRotate={handleRotate}
+          handleResetCamera={handleResetCamera}
+          cameraControlsRef1={cameraControlsRef1}
+          cameraControlsRef2={cameraControlsRef2}
         />
-        <div className="flex-1 flex flex-col">
-          <RenderArea
-            selectedModels={selectedModels}
-            cameraControlsRef1={cameraControlsRef1}
-            cameraControlsRef2={cameraControlsRef2}
-            delta={cameraSettings.delta}
-            rotationDelta={cameraSettings.rotationDelta}
-            showDrone={displaySettings.showDrone}
-          />
-          {selectedModelIds.length > 0 && (
-            <CameraControlPanel
-              delta={cameraSettings.delta}
-              setDelta={(value) => updateCameraSettings('delta', value)}
-              rotationDelta={cameraSettings.rotationDelta}
-              setRotationDelta={(value) =>
-                updateCameraSettings('rotationDelta', value)
-              }
-              handleMove={handleMove}
-              handleRotate={handleRotate}
-              handleResetCamera={handleResetCamera}
-              cameraControlsRef1={cameraControlsRef1}
-              cameraControlsRef2={cameraControlsRef2}
-            />
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
+
+  return <ViewerLayout leftPanel={leftPanel} mainContent={mainContent} />;
 }
 
 export default Viewer;
