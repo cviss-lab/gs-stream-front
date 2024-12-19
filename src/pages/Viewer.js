@@ -34,12 +34,14 @@ function Viewer() {
     getWebglModelUrl,
   );
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [delta, setDelta] = useState(DEFAULT_VIEW_SETTINGS.delta);
-  const [rotationDelta, setRotationDelta] = useState(
-    DEFAULT_VIEW_SETTINGS.rotationDelta,
-  );
-  const [showDrone, setShowDrone] = useState(false);
+  const [viewSettings, setViewSettings] = useState(DEFAULT_VIEW_SETTINGS);
+
+  const updateViewSettings = (key, value) => {
+    setViewSettings((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
 
   const {
     cameraControlsRef1,
@@ -58,27 +60,29 @@ function Viewer() {
           onModelSelection={handleModelSelection}
           aiFunctions={aiFunctions}
           onAiFunctionChange={handleAiFunctionChange}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
+          searchTerm={viewSettings.searchTerm}
+          setSearchTerm={(value) => updateViewSettings('searchTerm', value)}
           allModels={allModels}
-          showDrone={showDrone}
-          setShowDrone={setShowDrone}
+          showDrone={viewSettings.showDrone}
+          setShowDrone={(value) => updateViewSettings('showDrone', value)}
         />
         <div className="flex-1 p-4 flex flex-col">
           <RenderArea
             selectedModels={selectedModels}
             cameraControlsRef1={cameraControlsRef1}
             cameraControlsRef2={cameraControlsRef2}
-            delta={delta}
-            rotationDelta={rotationDelta}
-            showDrone={showDrone}
+            delta={viewSettings.delta}
+            rotationDelta={viewSettings.rotationDelta}
+            showDrone={viewSettings.showDrone}
           />
           {selectedModelIds.length > 0 && (
             <CameraControlPanel
-              delta={delta}
-              setDelta={setDelta}
-              rotationDelta={rotationDelta}
-              setRotationDelta={setRotationDelta}
+              delta={viewSettings.delta}
+              setDelta={(value) => updateViewSettings('delta', value)}
+              rotationDelta={viewSettings.rotationDelta}
+              setRotationDelta={(value) =>
+                updateViewSettings('rotationDelta', value)
+              }
               handleMove={handleMove}
               handleRotate={handleRotate}
               handleResetCamera={handleResetCamera}

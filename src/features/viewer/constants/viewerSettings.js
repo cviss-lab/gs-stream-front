@@ -6,6 +6,8 @@ export const INITIAL_ROTATION_DELTA = 0.1;
 export const DEFAULT_VIEW_SETTINGS = {
   delta: INITIAL_DELTA,
   rotationDelta: INITIAL_ROTATION_DELTA,
+  searchTerm: '',
+  showDrone: false,
   modelPosition: [0, 0, 0],
   maxPanX: 200,
   maxPanY: 200,
