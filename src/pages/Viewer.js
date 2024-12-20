@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 
 // Component imports
-import CameraControlPanel from 'features/viewer/components/controls/CameraControlPanel';
-import ControlPanel from 'features/viewer/components/controls/ControlPanel';
-import RenderArea from 'features/viewer/components/render/RenderArea';
+import CameraControlPanel from 'features/viewer/components/controls/panels/CameraControlPanel';
+import ControlPanel from 'features/viewer/components/controls/panels/ControlPanel';
+import RenderArea from 'features/viewer/components/viewport/render/RenderArea';
 
 // Custom hooks
 import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
@@ -15,7 +15,7 @@ import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
 import { useViewSettings } from 'features/viewer/hooks/useViewSettings';
 
 // Layout imports
-import { ViewerLayout } from 'features/viewer/layouts/ViewerLayout';
+import { ViewerLayout } from 'features/viewer/components/layouts/ViewerLayout';
 
 function Viewer() {
   // Check if running in standalone mode

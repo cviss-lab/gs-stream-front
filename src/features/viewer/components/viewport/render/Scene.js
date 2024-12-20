@@ -1,7 +1,7 @@
-import CameraControls from './camera/CameraControls';
-import SplatComponent from './splat/SplatComponent';
+import CameraControls from '../camera/CameraControls';
+import SplatComponent from '../splat/SplatComponent';
 import { Environment } from '@react-three/drei';
-import EgoDrone from './three/EgoDrone';
+import EgoDrone from '../objects/EgoDrone';
 import PropTypes from 'prop-types';
 function Scene({
   model,

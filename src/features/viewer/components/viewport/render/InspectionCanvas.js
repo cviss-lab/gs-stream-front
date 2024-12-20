@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Canvas } from '@react-three/fiber';
-import KeyDisplay from './camera/KeyDisplay';
-import { CameraPoseDisplay } from './camera/CameraPoseDisplay';
+import KeyDisplay from '../../controls/display/KeyDisplay';
+import { CameraPoseDisplay } from '../../controls/display/CameraPoseDisplay';
 import Scene from './Scene';
 import { useKeyboardControls } from 'features/viewer/hooks/useKeyboardControls';
 import { useCameraPose } from 'features/viewer/hooks/useCameraPose';

@@ -1,5 +1,5 @@
 import React from 'react';
-import TopNavigation from '../components/controls/TopNavigation';
+import TopNavigation from './TopNavigation';
 
 export function ViewerLayout({ leftPanel, mainContent }) {
   return (
