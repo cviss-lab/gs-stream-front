@@ -10,48 +10,47 @@ import { useKeyboardControls } from 'features/viewer/hooks/useKeyboardControls';
 import { useCameraPose } from 'features/viewer/hooks/useCameraPose';
 import { CameraPoseDisplay } from './camera/CameraPoseDisplay';
 
-const InspectionCanvas = forwardRef(({ model, controls, showDrone }, ref) => {
-  const keysPressed = useKeyboardControls();
-  const [cameraPose, setCameraPose] = useCameraPose(
-    model.renderSettings.camera,
-  );
+const InspectionCanvas = forwardRef(
+  ({ model, delta, rotationDelta, showDrone }, ref) => {
+    const keysPressed = useKeyboardControls();
+    const [cameraPose, setCameraPose] = useCameraPose(
+      model.renderSettings.camera,
+    );
 
-  return (
-    <div className="w-full h-full relative">
-      <KeyDisplay keysPressed={keysPressed} />
-      <CameraPoseDisplay cameraPose={cameraPose} />
+    return (
+      <div className="w-full h-full relative">
+        <KeyDisplay keysPressed={keysPressed} />
+        <CameraPoseDisplay cameraPose={cameraPose} />
 
-      <Canvas
-        className="w-full h-full bg-background"
-        gl={{ antialias: false }}
-        dpr={window.devicePixelRatio || 1}
-        camera={model.renderSettings.camera}
-      >
-        <axesHelper args={[5]} />
-        <CameraControls
-          ref={ref}
-          keysPressed={keysPressed}
-          delta={controls.delta}
-          rotationDelta={controls.rotationDelta}
-          maxPanX={model.renderSettings.model.maxPan.x}
-          maxPanY={model.renderSettings.model.maxPan.y}
-          maxPanZ={model.renderSettings.model.maxPan.z}
-          setCameraPose={setCameraPose}
-          cameraSettings={model.renderSettings.camera}
-        />
-        <SplatComponent
-          maxSplats={20000000}
-          splatPos={model.renderSettings.model.position}
-          splatRot={[Math.PI, 0, 0]}
-          splatScale={17.8}
-          splatUrl={model.splatUrl}
-        />
-        <Environment preset="city" />
-        {showDrone && <EgoDrone />}
-      </Canvas>
-    </div>
-  );
-});
+        <Canvas
+          className="w-full h-full bg-background"
+          gl={{ antialias: false }}
+          dpr={window.devicePixelRatio || 1}
+          camera={model.renderSettings.camera}
+        >
+          <axesHelper args={[5]} />
+          <CameraControls
+            ref={ref}
+            keysPressed={keysPressed}
+            delta={delta}
+            rotationDelta={rotationDelta}
+            setCameraPose={setCameraPose}
+            renderSettings={model.renderSettings}
+          />
+          <SplatComponent
+            maxSplats={20000000}
+            splatPos={model.renderSettings.model.position}
+            splatRot={[Math.PI, 0, 0]}
+            splatScale={17.8}
+            splatUrl={model.splatUrl}
+          />
+          <Environment preset="city" />
+          {showDrone && <EgoDrone />}
+        </Canvas>
+      </div>
+    );
+  },
+);
 
 InspectionCanvas.propTypes = {
   model: PropTypes.shape({
@@ -68,11 +67,13 @@ InspectionCanvas.propTypes = {
       camera: PropTypes.object.isRequired,
     }).isRequired,
   }).isRequired,
-  controls: PropTypes.shape({
-    delta: PropTypes.number.isRequired,
-    rotationDelta: PropTypes.number.isRequired,
-  }).isRequired,
+  delta: PropTypes.number.isRequired,
+  rotationDelta: PropTypes.number.isRequired,
   showDrone: PropTypes.bool,
+};
+
+InspectionCanvas.defaultProps = {
+  showDrone: false,
 };
 
 InspectionCanvas.displayName = 'InspectionCanvas';

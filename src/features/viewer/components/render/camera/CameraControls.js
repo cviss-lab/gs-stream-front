@@ -1,22 +1,18 @@
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import PropTypes from 'prop-types';
 
 const CameraControls = forwardRef(
   (
-    {
-      keysPressed,
-      delta,
-      rotationDelta,
-      maxPanX,
-      maxPanY,
-      maxPanZ,
-      setCameraPose,
-      cameraSettings,
-    },
+    { keysPressed, delta, rotationDelta, renderSettings, setCameraPose },
     ref,
   ) => {
     const { camera } = useThree();
+    const {
+      camera: cameraSettings,
+      model: { maxPan },
+    } = renderSettings;
 
     useEffect(() => {
       // Initialize camera settings
@@ -55,18 +51,18 @@ const CameraControls = forwardRef(
         // Limit position
         camera.position.x = THREE.MathUtils.clamp(
           camera.position.x,
-          -maxPanX,
-          maxPanX,
+          -maxPan.x,
+          maxPan.x,
         );
         camera.position.y = THREE.MathUtils.clamp(
           camera.position.y,
-          -maxPanY,
-          maxPanY,
+          -maxPan.y,
+          maxPan.y,
         );
         camera.position.z = THREE.MathUtils.clamp(
           camera.position.z,
-          -maxPanZ,
-          maxPanZ,
+          -maxPan.z,
+          maxPan.z,
         );
         // Update pose
         setCameraPose({
@@ -223,28 +219,28 @@ const CameraControls = forwardRef(
       // Limit camera position
       camera.position.x = THREE.MathUtils.clamp(
         camera.position.x,
-        -maxPanX,
-        maxPanX,
+        -maxPan.x,
+        maxPan.x,
       );
       camera.position.y = THREE.MathUtils.clamp(
         camera.position.y,
-        -maxPanY,
-        maxPanY,
+        -maxPan.y,
+        maxPan.y,
       );
       camera.position.z = THREE.MathUtils.clamp(
         camera.position.z,
-        -maxPanZ,
-        maxPanZ,
+        -maxPan.z,
+        maxPan.z,
       );
 
       // Restore previous state if position is clamped
       const isClamped =
-        camera.position.x === -maxPanX ||
-        camera.position.x === maxPanX ||
-        camera.position.y === -maxPanY ||
-        camera.position.y === maxPanY ||
-        camera.position.z === -maxPanZ ||
-        camera.position.z === maxPanZ;
+        camera.position.x === -maxPan.x ||
+        camera.position.x === maxPan.x ||
+        camera.position.y === -maxPan.y ||
+        camera.position.y === maxPan.y ||
+        camera.position.z === -maxPan.z ||
+        camera.position.z === maxPan.z;
 
       if (isClamped) {
         camera.position.copy(prevCameraPosition);
@@ -268,5 +264,22 @@ const CameraControls = forwardRef(
     return null;
   },
 );
+
+CameraControls.propTypes = {
+  keysPressed: PropTypes.object,
+  delta: PropTypes.number.isRequired,
+  rotationDelta: PropTypes.number.isRequired,
+  renderSettings: PropTypes.shape({
+    camera: PropTypes.object.isRequired,
+    model: PropTypes.shape({
+      maxPan: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
+        z: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+  setCameraPose: PropTypes.func.isRequired,
+};
 
 export default CameraControls;

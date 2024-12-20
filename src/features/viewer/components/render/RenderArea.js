@@ -3,11 +3,11 @@ import InspectionCanvas from './InspectionCanvas';
 
 function RenderArea({
   selectedModels,
-  cameraControlsRef1,
-  cameraControlsRef2,
   delta,
   rotationDelta,
   showDrone,
+  cameraControlsRef1,
+  cameraControlsRef2,
 }) {
   return (
     <div
@@ -32,10 +32,8 @@ function RenderArea({
                   : null
             }
             model={model}
-            controls={{
-              delta,
-              rotationDelta,
-            }}
+            delta={delta}
+            rotationDelta={rotationDelta}
             showDrone={showDrone}
           />
         </div>
