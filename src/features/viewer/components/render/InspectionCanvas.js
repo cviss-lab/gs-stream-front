@@ -1,14 +1,11 @@
-import React, { useState, useEffect, forwardRef } from 'react';
-import { Canvas } from '@react-three/fiber';
-import CameraControls from './camera/CameraControls';
-import SplatComponent from './splat/SplatComponent';
-import { Environment } from '@react-three/drei';
-import KeyDisplay from './camera/KeyDisplay';
-import EgoDrone from './three/EgoDrone';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { Canvas } from '@react-three/fiber';
+import KeyDisplay from './camera/KeyDisplay';
+import { CameraPoseDisplay } from './camera/CameraPoseDisplay';
+import Scene from './Scene';
 import { useKeyboardControls } from 'features/viewer/hooks/useKeyboardControls';
 import { useCameraPose } from 'features/viewer/hooks/useCameraPose';
-import { CameraPoseDisplay } from './camera/CameraPoseDisplay';
 
 const InspectionCanvas = forwardRef(
   ({ model, delta, rotationDelta, showDrone }, ref) => {
@@ -28,24 +25,15 @@ const InspectionCanvas = forwardRef(
           dpr={window.devicePixelRatio || 1}
           camera={model.renderSettings.camera}
         >
-          <axesHelper args={[5]} />
-          <CameraControls
-            ref={ref}
-            keysPressed={keysPressed}
+          <Scene
+            model={model}
             delta={delta}
             rotationDelta={rotationDelta}
+            showDrone={showDrone}
+            keysPressed={keysPressed}
             setCameraPose={setCameraPose}
-            renderSettings={model.renderSettings}
+            cameraControlsRef={ref}
           />
-          <SplatComponent
-            maxSplats={20000000}
-            splatPos={model.renderSettings.model.position}
-            splatRot={[Math.PI, 0, 0]}
-            splatScale={17.8}
-            splatUrl={model.splatUrl}
-          />
-          <Environment preset="city" />
-          {showDrone && <EgoDrone />}
         </Canvas>
       </div>
     );
