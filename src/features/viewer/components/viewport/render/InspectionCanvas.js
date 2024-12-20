@@ -8,7 +8,7 @@ import { useKeyboardControls } from 'features/viewer/hooks/useKeyboardControls';
 import { useCameraPose } from 'features/viewer/hooks/useCameraPose';
 
 const InspectionCanvas = forwardRef(
-  ({ model, delta, rotationDelta, showDrone }, ref) => {
+  ({ model, delta, rotationDelta, showDrone, isAnnotationMode }, ref) => {
     const keysPressed = useKeyboardControls();
     const [cameraPose, setCameraPose] = useCameraPose(
       model.renderSettings.camera,
@@ -33,6 +33,7 @@ const InspectionCanvas = forwardRef(
             keysPressed={keysPressed}
             setCameraPose={setCameraPose}
             cameraControlsRef={ref}
+            isAnnotationMode={isAnnotationMode}
           />
         </Canvas>
       </div>
@@ -58,6 +59,7 @@ InspectionCanvas.propTypes = {
   delta: PropTypes.number.isRequired,
   rotationDelta: PropTypes.number.isRequired,
   showDrone: PropTypes.bool,
+  isAnnotationMode: PropTypes.bool,
 };
 
 InspectionCanvas.defaultProps = {

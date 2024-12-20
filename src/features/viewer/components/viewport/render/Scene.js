@@ -3,6 +3,10 @@ import SplatComponent from '../splat/SplatComponent';
 import { Environment } from '@react-three/drei';
 import EgoDrone from '../objects/EgoDrone';
 import PropTypes from 'prop-types';
+import { useRef, useState } from 'react';
+import Annotation from 'features/annotation/Annotation';
+import AnnotationHandler from 'features/annotation/AnnotationHandler';
+
 function Scene({
   model,
   delta,
@@ -11,7 +15,25 @@ function Scene({
   keysPressed,
   setCameraPose,
   cameraControlsRef,
+  isAnnotationMode,
 }) {
+  const [annotations, setAnnotations] = useState([]);
+  const splatRef = useRef(null);
+
+  const handleAddAnnotation = (annotation) => {
+    setAnnotations((prev) => [
+      ...prev,
+      {
+        ...annotation,
+        label: `Marker ${prev.length + 1}`,
+      },
+    ]);
+  };
+
+  const handleAnnotationClick = (id) => {
+    setAnnotations((prev) => prev.filter((a) => a.id !== id));
+  };
+
   return (
     <>
       <axesHelper args={[5]} />
@@ -24,6 +46,7 @@ function Scene({
         renderSettings={model.renderSettings}
       />
       <SplatComponent
+        splatRef={splatRef}
         maxSplats={20000000}
         splatPos={model.renderSettings.model.position}
         splatRot={[Math.PI, 0, 0]}
@@ -32,6 +55,23 @@ function Scene({
       />
       <Environment preset="city" />
       {showDrone && <EgoDrone />}
+
+      <AnnotationHandler
+        isAnnotationMode={isAnnotationMode}
+        onAddAnnotation={handleAddAnnotation}
+        splatRef={splatRef}
+        annotations={annotations}
+      />
+
+      {annotations.map((annotation) => (
+        <Annotation
+          key={annotation.id}
+          id={annotation.id}
+          position={annotation.position}
+          label={annotation.label}
+          onClick={() => handleAnnotationClick(annotation.id)}
+        />
+      ))}
     </>
   );
 }
@@ -52,6 +92,7 @@ Scene.propTypes = {
   keysPressed: PropTypes.object,
   setCameraPose: PropTypes.func.isRequired,
   cameraControlsRef: PropTypes.object,
+  isAnnotationMode: PropTypes.bool,
 };
 
 export default Scene;

@@ -18,9 +18,12 @@ export function Splat({
   url = 'https://antimatter15.com/splat-data/train.splat',
   maxSplats = Infinity,
   splatScaleFactor = 1,
+  splatRef,
 }) {
   // Allow direct access to the mesh
   const ref = useRef(null);
+
+  splatRef.current = ref.current;
 
   // Create a worker ref
   const workerRef = useRef(null);

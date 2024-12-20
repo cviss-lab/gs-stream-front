@@ -5,6 +5,7 @@ export function useViewSettings() {
   const [displaySettings, setDisplaySettings] = useState({
     searchTerm: DEFAULT_VIEW_SETTINGS.searchTerm,
     showDrone: DEFAULT_VIEW_SETTINGS.showDrone,
+    isAnnotationMode: DEFAULT_VIEW_SETTINGS.isAnnotationMode,
   });
 
   const [cameraSettings, setCameraSettings] = useState({

@@ -8,6 +8,7 @@ export const DEFAULT_VIEW_SETTINGS = {
   rotationDelta: INITIAL_ROTATION_DELTA,
   searchTerm: '',
   showDrone: false,
+  isAnnotationMode: false,
   modelPosition: [0, 0, 0],
   maxPanX: 200,
   maxPanY: 200,

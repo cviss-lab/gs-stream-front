@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
 export function CameraPoseDisplay({ cameraPose }) {
-  useEffect(() => {
-    console.log('cameraPose', cameraPose);
-  }, [cameraPose]);
+  // useEffect(() => {
+  //   console.log('cameraPose', cameraPose);
+  // }, [cameraPose]);
 
   return (
     <div className="absolute top-0 right-0 p-2 bg-white bg-opacity-75 rounded z-10">

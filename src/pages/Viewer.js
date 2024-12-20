@@ -60,6 +60,10 @@ function Viewer() {
       showDrone={displaySettings.showDrone}
       setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
       allModels={allModels}
+      isAnnotationMode={displaySettings.isAnnotationMode}
+      setIsAnnotationMode={(value) =>
+        updateDisplaySettings('isAnnotationMode', value)
+      }
     />
   );
 
@@ -72,6 +76,7 @@ function Viewer() {
         delta={cameraSettings.delta}
         rotationDelta={cameraSettings.rotationDelta}
         showDrone={displaySettings.showDrone}
+        isAnnotationMode={displaySettings.isAnnotationMode}
       />
       {selectedModelIds.length > 0 && (
         <CameraControlPanel
