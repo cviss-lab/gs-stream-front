@@ -6,57 +6,20 @@ import { Environment } from '@react-three/drei';
 import KeyDisplay from './camera/KeyDisplay';
 import EgoDrone from './three/EgoDrone';
 import PropTypes from 'prop-types';
+import { useKeyboardControls } from 'features/viewer/hooks/useKeyboardControls';
+import { useCameraPose } from 'features/viewer/hooks/useCameraPose';
+import { CameraPoseDisplay } from './camera/CameraPoseDisplay';
 
 const InspectionCanvas = forwardRef(({ model, controls, showDrone }, ref) => {
-  const [keysPressed, setKeysPressed] = useState({});
-  const [cameraPose, setCameraPose] = useState({
-    position: {
-      x: model.renderSettings.camera.position[0],
-      y: model.renderSettings.camera.position[1],
-      z: model.renderSettings.camera.position[2],
-    },
-    rotation: {
-      x: model.renderSettings.camera.rotation[0],
-      y: model.renderSettings.camera.rotation[1],
-      z: model.renderSettings.camera.rotation[2],
-    },
-  });
+  const keysPressed = useKeyboardControls();
+  const [cameraPose, setCameraPose] = useCameraPose(
+    model.renderSettings.camera,
+  );
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      setKeysPressed((prevKeys) => ({ ...prevKeys, [event.code]: true }));
-    };
-
-    const handleKeyUp = (event) => {
-      setKeysPressed((prevKeys) => ({ ...prevKeys, [event.code]: false }));
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
-    };
-  }, []);
   return (
     <div className="w-full h-full relative">
       <KeyDisplay keysPressed={keysPressed} />
-
-      {/* Camera Pose Display */}
-      <div className="absolute top-0 right-0 p-2 bg-white bg-opacity-75 rounded z-10">
-        <h3 className="text-sm font-semibold">Camera Pose</h3>
-        <p className="text-xs">
-          Position: x: {cameraPose.position.x.toFixed(2)}, y:{' '}
-          {cameraPose.position.y.toFixed(2)}, z:{' '}
-          {cameraPose.position.z.toFixed(2)}
-        </p>
-        <p className="text-xs">
-          Rotation: x: {cameraPose.rotation.x.toFixed(2)}°, y:{' '}
-          {cameraPose.rotation.y.toFixed(2)}°, z:{' '}
-          {cameraPose.rotation.z.toFixed(2)}°
-        </p>
-      </div>
+      <CameraPoseDisplay cameraPose={cameraPose} />
 
       <Canvas
         className="w-full h-full bg-background"
