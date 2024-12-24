@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 import Annotation from 'features/annotation/Annotation';
 import AnnotationHandler from 'features/annotation/AnnotationHandler';
+import CameraArray from '../objects/CameraPositionMarkerGroup';
 
 function Scene({
   model,
@@ -36,6 +37,15 @@ function Scene({
 
   return (
     <>
+      <ambientLight intensity={Math.PI / 2} />
+      <spotLight
+        position={[10, 10, 10]}
+        angle={0.15}
+        penumbra={1}
+        decay={0}
+        intensity={Math.PI}
+      />
+      <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
       <axesHelper args={[5]} />
       <CameraControls
         ref={cameraControlsRef}
@@ -62,7 +72,6 @@ function Scene({
         splatRef={splatRef}
         annotations={annotations}
       />
-
       {annotations.map((annotation) => (
         <Annotation
           key={annotation.id}
@@ -72,6 +81,11 @@ function Scene({
           onClick={() => handleAnnotationClick(annotation.id)}
         />
       ))}
+      {model.cameraData && (
+        <group rotation={[Math.PI, 0, 0]} scale={17.8}>
+          <CameraArray data={model.cameraData} />
+        </group>
+      )}
     </>
   );
 }
@@ -85,6 +99,13 @@ Scene.propTypes = {
       }).isRequired,
       camera: PropTypes.object.isRequired,
     }).isRequired,
+    cameraData: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        position: PropTypes.arrayOf(PropTypes.number),
+        rotation: PropTypes.arrayOf(PropTypes.number),
+      }),
+    ),
   }).isRequired,
   delta: PropTypes.number.isRequired,
   rotationDelta: PropTypes.number.isRequired,

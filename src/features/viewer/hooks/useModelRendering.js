@@ -23,6 +23,7 @@ const createModelRenderSettings = (model, viewSettings) => {
     },
   };
 };
+
 export const useModelRendering = (
   selectedModelIds,
   allModels,
@@ -39,6 +40,7 @@ export const useModelRendering = (
           id: model.id,
           splatUrl: getWebglModelUrl(model.id),
           renderSettings: createModelRenderSettings(model, viewSettings),
+          cameraData: model.cameraData,
         };
       })
       .filter(Boolean);
