@@ -1,19 +1,19 @@
 import React from 'react';
 import { Checkbox } from '@mui/material';
 
-function Tools({ tools }) {
+function Tools({ tools, onToolChange }) {
   return (
     <div className="mb-6">
       <h3 className="text-lg font-semibold mb-2 text-sky-600">Tools</h3>
       <div className="space-y-2">
-        {tools.map((tool) => (
-          <div key={tool.id} className="flex items-center">
+        {Object.entries(tools).map(([tool, isChecked]) => (
+          <div key={tool} className="flex items-center">
             <Checkbox
-              checked={tool.value}
-              onChange={(e) => tool.onChange(e.target.checked)}
-              aria-label={tool.label}
+              checked={isChecked}
+              onChange={(e) => onToolChange(tool, e.target.checked)}
+              aria-label={`Toggle ${tool} function`}
             />
-            <label className="ml-2">{tool.label}</label>
+            <label className="ml-2 capitalize">{tool}</label>
           </div>
         ))}
       </div>

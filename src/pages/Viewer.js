@@ -1,5 +1,5 @@
 // React related imports
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 // Component imports
 import CameraControlPanel from 'features/viewer/components/controls/panels/CameraControlPanel';
@@ -11,6 +11,7 @@ import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
 import { useModelData } from 'features/viewer/hooks/useModelData';
 import { useModelSelection } from 'features/viewer/hooks/useModelSelection';
 import { useAIFunctions } from 'features/viewer/hooks/useAIFunctions';
+import { useTools } from 'features/viewer/hooks/useTools';
 import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
 import { useViewSettings } from 'features/viewer/hooks/useViewSettings';
 
@@ -21,18 +22,6 @@ function Viewer() {
   // Check if running in standalone mode
   const isStandalone = process.env.REACT_APP_STANDALONE === 'true';
   const backendAddress = isStandalone ? '' : process.env.REACT_APP_BACKEND_URL;
-
-  const { selectedModelIds, handleModelSelection } = useModelSelection();
-  const { aiFunctions, handleAiFunctionChange } = useAIFunctions();
-  const { allModels, getWebglModelUrl } = useModelData(
-    backendAddress,
-    isStandalone,
-  );
-  const { selectedModels } = useModelRendering(
-    selectedModelIds,
-    allModels,
-    getWebglModelUrl,
-  );
 
   const {
     displaySettings,
@@ -49,17 +38,43 @@ function Viewer() {
     handleResetCamera,
   } = useCameraControls();
 
+  const { selectedModelIds, handleModelSelection } = useModelSelection();
+  const { aiFunctions, handleAiFunctionChange } = useAIFunctions();
+
+  const { tools, handleToolChange, resetTools } = useTools(
+    displaySettings,
+    updateDisplaySettings,
+  );
+
+  const { allModels, getWebglModelUrl } = useModelData(
+    backendAddress,
+    isStandalone,
+  );
+
+  const { selectedModels } = useModelRendering(
+    selectedModelIds,
+    allModels,
+    getWebglModelUrl,
+  );
+
+  const handleResetAll = useCallback(() => {
+    handleResetCamera();
+    resetTools();
+  }, [handleResetCamera, resetTools]);
+
   const leftPanel = (
     <ControlPanel
       selectedModelIds={selectedModelIds}
       onModelSelection={handleModelSelection}
-      aiFunctions={aiFunctions}
-      onAiFunctionChange={handleAiFunctionChange}
       searchTerm={displaySettings.searchTerm}
       setSearchTerm={(value) => updateDisplaySettings('searchTerm', value)}
       showDrone={displaySettings.showDrone}
       setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
       allModels={allModels}
+      aiFunctions={aiFunctions}
+      onAiFunctionChange={handleAiFunctionChange}
+      tools={tools}
+      onToolChange={handleToolChange}
       isAnnotationMode={displaySettings.isAnnotationMode}
       setIsAnnotationMode={(value) =>
         updateDisplaySettings('isAnnotationMode', value)
@@ -89,6 +104,7 @@ function Viewer() {
           handleMove={handleMove}
           handleRotate={handleRotate}
           handleResetCamera={handleResetCamera}
+          handleResetAll={handleResetAll}
           cameraControlsRef1={cameraControlsRef1}
           cameraControlsRef2={cameraControlsRef2}
         />

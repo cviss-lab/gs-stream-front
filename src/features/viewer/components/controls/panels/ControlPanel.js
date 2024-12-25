@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, FormControlLabel, Checkbox, Switch } from '@mui/material';
+import { Box } from '@mui/material';
 import ModelSelector from '../model/ModelSelector';
 import AiFunctions from '../tools/AiFunctions';
 import Tools from '../tools/Tools';
@@ -9,29 +9,12 @@ function ControlPanel({
   onModelSelection,
   aiFunctions,
   onAiFunctionChange,
+  tools,
+  onToolChange,
   searchTerm,
   setSearchTerm,
   allModels,
-  showDrone,
-  setShowDrone,
-  isAnnotationMode,
-  setIsAnnotationMode,
 }) {
-  const tools = [
-    {
-      id: 'drone',
-      label: 'Show Drone',
-      value: showDrone,
-      onChange: setShowDrone,
-    },
-    {
-      id: 'annotation',
-      label: 'Annotation Mode',
-      value: isAnnotationMode,
-      onChange: setIsAnnotationMode,
-    },
-  ];
-
   return (
     <Box className="w-full lg:w-1/5 min-w-[250px] p-4 bg-white shadow-md overflow-auto">
       <h2 className="text-xl font-bold mb-4 text-sky-600 text-center">
@@ -51,7 +34,7 @@ function ControlPanel({
         onAiFunctionChange={onAiFunctionChange}
       />
 
-      <Tools tools={tools} />
+      <Tools tools={tools} onToolChange={onToolChange} />
     </Box>
   );
 }
