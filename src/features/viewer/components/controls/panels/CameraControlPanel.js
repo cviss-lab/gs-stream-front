@@ -9,6 +9,7 @@ const CameraControlPanel = ({
   handleMove,
   handleRotate,
   handleResetCamera,
+  handleResetAll,
   cameraControlsRef1,
   cameraControlsRef2,
 }) => {
@@ -72,23 +73,40 @@ const CameraControlPanel = ({
           />
         </div>
 
-        {/* Reset Camera Button */}
+        {/* Reset Buttons */}
         <div className="flex flex-col justify-start">
-          <Tooltip title="Reset Camera (R)">
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: 'rgb(2 132 199)',
-                color: 'white',
-                minWidth: '100px',
-              }}
-              size="small"
-              onClick={handleResetCamera}
-              aria-label="Reset camera to initial position and rotation (R)"
-            >
-              Reset Camera
-            </Button>
-          </Tooltip>
+          <div className="flex space-x-2">
+            <Tooltip title="Reset Camera (R)">
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: 'rgb(2 132 199)',
+                  color: 'white',
+                  minWidth: '100px',
+                }}
+                size="small"
+                onClick={handleResetCamera}
+                aria-label="Reset camera to initial position and rotation (R)"
+              >
+                Reset Camera
+              </Button>
+            </Tooltip>
+            <Tooltip title="Reset All">
+              <Button
+                variant="contained"
+                style={{
+                  backgroundColor: 'rgb(2 132 199)',
+                  color: 'white',
+                  minWidth: '100px',
+                }}
+                size="small"
+                onClick={handleResetAll}
+                aria-label="Reset all settings to initial values"
+              >
+                Reset All
+              </Button>
+            </Tooltip>
+          </div>
         </div>
       </div>
     </Box>

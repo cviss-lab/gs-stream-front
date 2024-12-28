@@ -1,14 +1,21 @@
+import { useEffect } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
+
 import { useThree } from '@react-three/fiber';
 import { Vector2, Raycaster, Vector3 } from 'three';
-import { useEffect } from 'react';
+import Annotation from './Annotation';
+import { useAnnotations } from './hooks/useAnnotations';
 
-const AnnotationHandler = ({
-  isAnnotationMode,
-  onAddAnnotation,
-  splatRef,
-  annotations,
-}) => {
+const AnnotationHandler = forwardRef(({ isAnnotationMode, splatRef }, ref) => {
   const { camera, gl } = useThree();
+  const { annotations, addAnnotation, resetAnnotations } = useAnnotations();
+
+  // Set up the resetAnnotations method to be called from outside
+  useImperativeHandle(ref, () => ({
+    resetAnnotations: () => {
+      resetAnnotations(); // Reset annotations.
+    },
+  }));
 
   const handleClick = (event) => {
     if (!isAnnotationMode) {
@@ -32,18 +39,18 @@ const AnnotationHandler = ({
     const raycaster = new Raycaster();
     raycaster.setFromCamera(mousePosition, camera);
 
-    // splat 메시의 속성들 가져오기
+    // Get splat mesh attributes
     const splatCenters = splatMesh.geometry.attributes.center.array;
     const splatScales = splatMesh.geometry.attributes.scale.array;
     const splatColors = splatMesh.geometry.attributes.color.array;
     const splatsCount = splatCenters.length / 3;
 
-    // 월드 변환 행렬 가져오기
+    // Get world transformation matrix
     const modelMatrix = splatMesh.matrixWorld;
     let closestIntersection = null;
     let minDistance = Infinity;
 
-    // 각 splat에 대해 검사
+    // Check each splat
     for (let i = 0; i < splatsCount; i++) {
       const position = new Vector3(
         splatCenters[i * 3],
@@ -51,21 +58,21 @@ const AnnotationHandler = ({
         splatCenters[i * 3 + 2],
       );
 
-      // 로컬 좌표를 월드 좌표로 변환
+      // Convert local coordinates to world coordinates
       position.applyMatrix4(modelMatrix);
 
       const scale = splatScales[i * 3];
       const opacity = splatColors[i * 4 + 3];
 
-      // splat과 레이 사이의 거리 계산
+      // Calculate distance between splat and ray
       const distance = raycaster.ray.distanceToPoint(position);
       const cameraDistance = camera.position.distanceTo(position);
 
-      // 가장 가까운 교차점 찾기
+      // Find the closest intersection
       if (
         cameraDistance + distance < minDistance &&
-        distance < scale * 10 && // scale을 고려한 임계값
-        opacity > 0.02 // 투명한 splat 무시
+        distance < scale * 10 && // Threshold considering scale
+        opacity > 0.02 // Ignore transparent splats
       ) {
         minDistance = cameraDistance + distance;
         closestIntersection = position.clone();
@@ -74,14 +81,11 @@ const AnnotationHandler = ({
 
     if (closestIntersection) {
       console.log('Found intersection point:', closestIntersection);
-      onAddAnnotation({
-        id: Date.now(),
-        position: [
-          closestIntersection.x,
-          closestIntersection.y,
-          closestIntersection.z,
-        ],
-      });
+      addAnnotation([
+        closestIntersection.x,
+        closestIntersection.y,
+        closestIntersection.z,
+      ]);
     }
   };
 
@@ -91,9 +95,23 @@ const AnnotationHandler = ({
     return () => {
       domElement.removeEventListener('click', handleClick);
     };
-  }, [gl, isAnnotationMode, handleClick]);
+  }, [gl, isAnnotationMode, annotations]);
 
-  return null;
-};
+  return (
+    <>
+      {annotations.map((annotation) => (
+        <Annotation
+          key={annotation.id}
+          id={annotation.id}
+          position={annotation.position}
+          label={`Marker ${annotations.length + 1}`} // Set label
+          onClick={() => {
+            console.log('Remove marker');
+          }}
+        />
+      ))}
+    </>
+  );
+});
 
 export default AnnotationHandler;

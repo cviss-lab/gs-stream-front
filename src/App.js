@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AnnotationsProvider } from 'features/annotation/hooks/AnnotationsContext';
 import {
   HashRouter as Router,
   Route,
@@ -15,16 +16,20 @@ function App() {
   console.log('Require Auth:', requireAuth);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route
-          path="/"
-          element={requireAuth && !token ? <Navigate to="/login" /> : <Home />}
-        />
-        <Route path="/viewer" element={<Viewer />} />
-      </Routes>
-    </Router>
+    <AnnotationsProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route
+            path="/"
+            element={
+              requireAuth && !token ? <Navigate to="/login" /> : <Home />
+            }
+          />
+          <Route path="/viewer" element={<Viewer />} />
+        </Routes>
+      </Router>
+    </AnnotationsProvider>
   );
 }
 

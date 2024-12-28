@@ -3,8 +3,7 @@ import SplatComponent from '../splat/SplatComponent';
 import { Environment } from '@react-three/drei';
 import EgoDrone from '../objects/EgoDrone';
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
-import Annotation from 'features/annotation/Annotation';
+import { useRef } from 'react';
 import AnnotationHandler from 'features/annotation/AnnotationHandler';
 import CameraArray from '../objects/CameraPositionMarkerGroup';
 
@@ -18,22 +17,7 @@ function Scene({
   cameraControlsRef,
   isAnnotationMode,
 }) {
-  const [annotations, setAnnotations] = useState([]);
   const splatRef = useRef(null);
-
-  const handleAddAnnotation = (annotation) => {
-    setAnnotations((prev) => [
-      ...prev,
-      {
-        ...annotation,
-        label: `Marker ${prev.length + 1}`,
-      },
-    ]);
-  };
-
-  const handleAnnotationClick = (id) => {
-    setAnnotations((prev) => prev.filter((a) => a.id !== id));
-  };
 
   return (
     <>
@@ -68,19 +52,8 @@ function Scene({
 
       <AnnotationHandler
         isAnnotationMode={isAnnotationMode}
-        onAddAnnotation={handleAddAnnotation}
         splatRef={splatRef}
-        annotations={annotations}
       />
-      {annotations.map((annotation) => (
-        <Annotation
-          key={annotation.id}
-          id={annotation.id}
-          position={annotation.position}
-          label={annotation.label}
-          onClick={() => handleAnnotationClick(annotation.id)}
-        />
-      ))}
       {model.cameraData && (
         <group rotation={[Math.PI, 0, 0]} scale={17.8}>
           <CameraArray data={model.cameraData} />

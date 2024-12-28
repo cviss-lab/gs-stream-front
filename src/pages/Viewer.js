@@ -1,5 +1,5 @@
 // React related imports
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 // Component imports
 import CameraControlPanel from 'features/viewer/components/controls/panels/CameraControlPanel';
@@ -14,6 +14,7 @@ import { useAIFunctions } from 'features/viewer/hooks/useAIFunctions';
 import { useTools } from 'features/viewer/hooks/useTools';
 import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
 import { useViewSettings } from 'features/viewer/hooks/useViewSettings';
+import { useAnnotations } from 'features/annotation/hooks/useAnnotations';
 
 // Layout imports
 import { ViewerLayout } from 'features/viewer/components/layouts/ViewerLayout';
@@ -46,6 +47,8 @@ function Viewer() {
     updateDisplaySettings,
   );
 
+  const { resetAnnotations } = useAnnotations();
+
   const { allModels, getWebglModelUrl } = useModelData(
     backendAddress,
     isStandalone,
@@ -60,21 +63,22 @@ function Viewer() {
   const handleResetAll = useCallback(() => {
     handleResetCamera();
     resetTools();
-  }, [handleResetCamera, resetTools]);
+    resetAnnotations();
+  }, [handleResetCamera, resetTools, resetAnnotations]);
 
   const leftPanel = (
     <ControlPanel
-      selectedModelIds={selectedModelIds}
-      onModelSelection={handleModelSelection}
       searchTerm={displaySettings.searchTerm}
       setSearchTerm={(value) => updateDisplaySettings('searchTerm', value)}
-      showDrone={displaySettings.showDrone}
-      setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
+      selectedModelIds={selectedModelIds}
+      onModelSelection={handleModelSelection}
       allModels={allModels}
       aiFunctions={aiFunctions}
       onAiFunctionChange={handleAiFunctionChange}
       tools={tools}
       onToolChange={handleToolChange}
+      showDrone={displaySettings.showDrone}
+      setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
       isAnnotationMode={displaySettings.isAnnotationMode}
       setIsAnnotationMode={(value) =>
         updateDisplaySettings('isAnnotationMode', value)
