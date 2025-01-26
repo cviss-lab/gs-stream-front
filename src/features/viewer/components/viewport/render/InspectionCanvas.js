@@ -8,7 +8,7 @@ import { useKeyboardControls } from 'features/viewer/hooks/useKeyboardControls';
 import { useCameraPose } from 'features/viewer/hooks/useCameraPose';
 
 const InspectionCanvas = forwardRef(
-  ({ model, delta, rotationDelta, showDrone, isAnnotationMode }, ref) => {
+  ({ model, delta, rotationDelta, isDroneVisible, isAnnotationMode }, ref) => {
     const keysPressed = useKeyboardControls();
     const [cameraPose, setCameraPose] = useCameraPose(
       model.renderSettings.camera,
@@ -29,10 +29,10 @@ const InspectionCanvas = forwardRef(
             model={model}
             delta={delta}
             rotationDelta={rotationDelta}
-            showDrone={showDrone}
             keysPressed={keysPressed}
             setCameraPose={setCameraPose}
             cameraControlsRef={ref}
+            isDroneVisible={isDroneVisible}
             isAnnotationMode={isAnnotationMode}
           />
         </Canvas>
@@ -58,12 +58,12 @@ InspectionCanvas.propTypes = {
   }).isRequired,
   delta: PropTypes.number.isRequired,
   rotationDelta: PropTypes.number.isRequired,
-  showDrone: PropTypes.bool,
+  isDroneVisible: PropTypes.bool,
   isAnnotationMode: PropTypes.bool,
 };
 
 InspectionCanvas.defaultProps = {
-  showDrone: false,
+  isDroneVisible: false,
 };
 
 InspectionCanvas.displayName = 'InspectionCanvas';

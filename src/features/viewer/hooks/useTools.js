@@ -1,15 +1,16 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 
 const TOOL_SETTINGS_MAP = {
-  drone: 'showDrone',
+  drone: 'isDroneVisible',
   annotation: 'isAnnotationMode',
+  camera: 'isCameraVisible',
 };
 
 export const useTools = (displaySettings, updateDisplaySettings) => {
-  const tools = {
-    drone: displaySettings.showDrone,
-    annotation: displaySettings.isAnnotationMode,
-  };
+  const tools = Object.keys(TOOL_SETTINGS_MAP).reduce((acc, tool) => {
+    acc[tool] = displaySettings[TOOL_SETTINGS_MAP[tool]];
+    return acc;
+  }, {});
 
   const handleToolChange = useCallback(
     (toolName) => {
@@ -32,4 +33,14 @@ export const useTools = (displaySettings, updateDisplaySettings) => {
     handleToolChange,
     resetTools,
   };
+};
+
+export const generateToolProps = (displaySettings, updateDisplaySettings) => {
+  return Object.entries(TOOL_SETTINGS_MAP).reduce((acc, [tool, settingKey]) => {
+    acc[settingKey] = displaySettings[settingKey];
+    acc[`set${settingKey.charAt(0).toUpperCase() + settingKey.slice(1)}`] = (
+      value,
+    ) => updateDisplaySettings(settingKey, value);
+    return acc;
+  }, {});
 };

@@ -8,7 +8,8 @@
         "name": "self",
         "message": "self is allowed only in Web Workers"
       }
-    ]
+    ],
+    "react/react-in-jsx-scope": "off"
   },
   "env": {
     "es2020": true

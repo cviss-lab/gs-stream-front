@@ -11,7 +11,7 @@ import { useCameraControls } from 'features/viewer/hooks/useCameraControls';
 import { useModelData } from 'features/viewer/hooks/useModelData';
 import { useModelSelection } from 'features/viewer/hooks/useModelSelection';
 import { useAIFunctions } from 'features/viewer/hooks/useAIFunctions';
-import { useTools } from 'features/viewer/hooks/useTools';
+import { useTools, generateToolProps } from 'features/viewer/hooks/useTools';
 import { useModelRendering } from 'features/viewer/hooks/useModelRendering';
 import { useViewSettings } from 'features/viewer/hooks/useViewSettings';
 import { useAnnotations } from 'features/annotation/hooks/useAnnotations';
@@ -66,6 +66,8 @@ function Viewer() {
     resetAnnotations();
   }, [handleResetCamera, resetTools, resetAnnotations]);
 
+  const toolProps = generateToolProps(displaySettings, updateDisplaySettings);
+
   const leftPanel = (
     <ControlPanel
       searchTerm={displaySettings.searchTerm}
@@ -77,12 +79,7 @@ function Viewer() {
       onAiFunctionChange={handleAiFunctionChange}
       tools={tools}
       onToolChange={handleToolChange}
-      showDrone={displaySettings.showDrone}
-      setShowDrone={(value) => updateDisplaySettings('showDrone', value)}
-      isAnnotationMode={displaySettings.isAnnotationMode}
-      setIsAnnotationMode={(value) =>
-        updateDisplaySettings('isAnnotationMode', value)
-      }
+      {...toolProps}
     />
   );
 
@@ -94,8 +91,9 @@ function Viewer() {
         cameraControlsRef2={cameraControlsRef2}
         delta={cameraSettings.delta}
         rotationDelta={cameraSettings.rotationDelta}
-        showDrone={displaySettings.showDrone}
+        isDroneVisible={displaySettings.isDroneVisible}
         isAnnotationMode={displaySettings.isAnnotationMode}
+        {...toolProps}
       />
       {selectedModelIds.length > 0 && (
         <CameraControlPanel

@@ -1,9 +1,9 @@
+import { useRef } from 'react';
+import PropTypes from 'prop-types';
+import { Environment } from '@react-three/drei';
 import CameraControls from '../camera/CameraControls';
 import SplatComponent from '../splat/SplatComponent';
-import { Environment } from '@react-three/drei';
 import EgoDrone from '../objects/EgoDrone';
-import PropTypes from 'prop-types';
-import { useRef } from 'react';
 import AnnotationHandler from 'features/annotation/AnnotationHandler';
 import CameraArray from '../objects/CameraPositionMarkerGroup';
 
@@ -11,10 +11,10 @@ function Scene({
   model,
   delta,
   rotationDelta,
-  showDrone,
   keysPressed,
   setCameraPose,
   cameraControlsRef,
+  isDroneVisible,
   isAnnotationMode,
 }) {
   const splatRef = useRef(null);
@@ -48,7 +48,7 @@ function Scene({
         splatUrl={model.splatUrl}
       />
       <Environment preset="city" />
-      {showDrone && <EgoDrone />}
+      {isDroneVisible && <EgoDrone />}
 
       <AnnotationHandler
         isAnnotationMode={isAnnotationMode}
@@ -82,7 +82,7 @@ Scene.propTypes = {
   }).isRequired,
   delta: PropTypes.number.isRequired,
   rotationDelta: PropTypes.number.isRequired,
-  showDrone: PropTypes.bool,
+  isDroneVisible: PropTypes.bool,
   keysPressed: PropTypes.object,
   setCameraPose: PropTypes.func.isRequired,
   cameraControlsRef: PropTypes.object,

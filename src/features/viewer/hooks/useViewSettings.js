@@ -4,8 +4,9 @@ import { DEFAULT_VIEW_SETTINGS } from '../constants/viewerSettings';
 export function useViewSettings() {
   const [displaySettings, setDisplaySettings] = useState({
     searchTerm: DEFAULT_VIEW_SETTINGS.searchTerm,
-    showDrone: DEFAULT_VIEW_SETTINGS.showDrone,
+    isDroneVisible: DEFAULT_VIEW_SETTINGS.isDroneVisible,
     isAnnotationMode: DEFAULT_VIEW_SETTINGS.isAnnotationMode,
+    isCameraVisible: DEFAULT_VIEW_SETTINGS.isCameraVisible,
   });
 
   const [cameraSettings, setCameraSettings] = useState({

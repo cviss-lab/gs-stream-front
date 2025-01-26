@@ -5,7 +5,7 @@ function RenderArea({
   selectedModels,
   delta,
   rotationDelta,
-  showDrone,
+  isDroneVisible,
   cameraControlsRef1,
   cameraControlsRef2,
   isAnnotationMode,
@@ -35,7 +35,7 @@ function RenderArea({
             model={model}
             delta={delta}
             rotationDelta={rotationDelta}
-            showDrone={showDrone}
+            isDroneVisible={isDroneVisible}
             isAnnotationMode={isAnnotationMode}
           />
         </div>
