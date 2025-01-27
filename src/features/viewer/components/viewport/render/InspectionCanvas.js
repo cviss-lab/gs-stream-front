@@ -14,7 +14,7 @@ const InspectionCanvas = forwardRef(
       delta,
       rotationDelta,
       isDroneVisible,
-      isAnnotationMode,
+      isPointAnnotationEnabled,
       isCameraVisible,
     },
     ref,
@@ -43,7 +43,7 @@ const InspectionCanvas = forwardRef(
             setCameraPose={setCameraPose}
             cameraControlsRef={ref}
             isDroneVisible={isDroneVisible}
-            isAnnotationMode={isAnnotationMode}
+            isPointAnnotationEnabled={isPointAnnotationEnabled}
             isCameraVisible={isCameraVisible}
           />
         </Canvas>
@@ -70,7 +70,7 @@ InspectionCanvas.propTypes = {
   delta: PropTypes.number.isRequired,
   rotationDelta: PropTypes.number.isRequired,
   isDroneVisible: PropTypes.bool,
-  isAnnotationMode: PropTypes.bool,
+  isPointAnnotationEnabled: PropTypes.bool,
 };
 
 InspectionCanvas.defaultProps = {

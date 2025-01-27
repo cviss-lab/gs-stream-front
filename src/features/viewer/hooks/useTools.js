@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 
 const TOOL_SETTINGS_MAP = {
   drone: 'isDroneVisible',
-  annotation: 'isAnnotationMode',
-  camera: 'isCameraVisible',
+  'point annotations': 'isPointAnnotationEnabled',
+  'camera annotations': 'isCameraVisible',
 };
 
 export const useTools = (displaySettings, updateDisplaySettings) => {

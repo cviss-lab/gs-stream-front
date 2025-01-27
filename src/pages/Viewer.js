@@ -92,7 +92,7 @@ function Viewer() {
         delta={cameraSettings.delta}
         rotationDelta={cameraSettings.rotationDelta}
         isDroneVisible={displaySettings.isDroneVisible}
-        isAnnotationMode={displaySettings.isAnnotationMode}
+        isPointAnnotationEnabled={displaySettings.isPointAnnotationEnabled}
         isCameraVisible={displaySettings.isCameraVisible}
         {...toolProps}
       />

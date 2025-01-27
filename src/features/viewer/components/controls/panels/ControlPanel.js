@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import ModelSelector from '../model/ModelSelector';
 import AiFunctions from '../tools/AiFunctions';
@@ -38,5 +39,16 @@ function ControlPanel({
     </Box>
   );
 }
+ControlPanel.propTypes = {
+  selectedModelIds: PropTypes.array.isRequired,
+  onModelSelection: PropTypes.func.isRequired,
+  aiFunctions: PropTypes.array.isRequired,
+  onAiFunctionChange: PropTypes.func.isRequired,
+  tools: PropTypes.array.isRequired,
+  onToolChange: PropTypes.func.isRequired,
+  searchTerm: PropTypes.string.isRequired,
+  setSearchTerm: PropTypes.func.isRequired,
+  allModels: PropTypes.array.isRequired,
+};
 
 export default ControlPanel;
