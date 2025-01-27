@@ -9,7 +9,7 @@ export const DEFAULT_VIEW_SETTINGS = {
   searchTerm: '',
   isDroneVisible: false,
   isPointAnnotationEnabled: false,
-  isCameraVisible: false,
+  isCameraAnnotationEnabled: false,
   modelPosition: [0, 0, 0],
   maxPanX: 200,
   maxPanY: 200,

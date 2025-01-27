@@ -15,7 +15,7 @@ const InspectionCanvas = forwardRef(
       rotationDelta,
       isDroneVisible,
       isPointAnnotationEnabled,
-      isCameraVisible,
+      isCameraAnnotationEnabled,
     },
     ref,
   ) => {
@@ -44,7 +44,7 @@ const InspectionCanvas = forwardRef(
             cameraControlsRef={ref}
             isDroneVisible={isDroneVisible}
             isPointAnnotationEnabled={isPointAnnotationEnabled}
-            isCameraVisible={isCameraVisible}
+            isCameraAnnotationEnabled={isCameraAnnotationEnabled}
           />
         </Canvas>
       </div>

@@ -6,7 +6,7 @@ export function useViewSettings() {
     searchTerm: DEFAULT_VIEW_SETTINGS.searchTerm,
     isDroneVisible: DEFAULT_VIEW_SETTINGS.isDroneVisible,
     isPointAnnotationEnabled: DEFAULT_VIEW_SETTINGS.isPointAnnotationEnabled,
-    isCameraVisible: DEFAULT_VIEW_SETTINGS.isCameraVisible,
+    isCameraAnnotationEnabled: DEFAULT_VIEW_SETTINGS.isCameraAnnotationEnabled,
   });
 
   const [cameraSettings, setCameraSettings] = useState({

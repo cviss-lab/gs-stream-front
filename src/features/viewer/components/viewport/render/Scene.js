@@ -15,7 +15,7 @@ function Scene({
   cameraControlsRef,
   isDroneVisible,
   isPointAnnotationEnabled,
-  isCameraVisible,
+  isCameraAnnotationEnabled,
 }) {
   return (
     <>
@@ -46,7 +46,7 @@ function Scene({
       {isDroneVisible && <EgoDrone />}
 
       <AnnotationHandler isPointAnnotationEnabled={isPointAnnotationEnabled} />
-      {isCameraVisible && model.cameraData && (
+      {isCameraAnnotationEnabled && model.cameraData && (
         <group rotation={[Math.PI, 0, 0]} scale={1}>
           <CameraArray data={model.cameraData} />
         </group>
@@ -79,7 +79,7 @@ Scene.propTypes = {
   setCameraPose: PropTypes.func.isRequired,
   cameraControlsRef: PropTypes.object,
   isPointAnnotationEnabled: PropTypes.bool,
-  isCameraVisible: PropTypes.bool,
+  isCameraAnnotationEnabled: PropTypes.bool,
 };
 
 export default Scene;

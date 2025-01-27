@@ -93,7 +93,7 @@ function Viewer() {
         rotationDelta={cameraSettings.rotationDelta}
         isDroneVisible={displaySettings.isDroneVisible}
         isPointAnnotationEnabled={displaySettings.isPointAnnotationEnabled}
-        isCameraVisible={displaySettings.isCameraVisible}
+        isCameraAnnotationEnabled={displaySettings.isCameraAnnotationEnabled}
         {...toolProps}
       />
       {selectedModelIds.length > 0 && (
