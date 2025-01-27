@@ -10,13 +10,17 @@ function Tools({ tools, onToolChange }) {
   return (
     <div className="mb-6">
       <h3 className="text-lg font-semibold mb-2 text-sky-600">Tools</h3>
-      <div className="space-y-2">
+      <div className="-my-2">
         {Object.entries(tools).map(([tool, isChecked]) => (
-          <div key={tool} className="flex items-center">
+          <div key={tool} className="flex items-center py">
             <Checkbox
               checked={isChecked}
               onChange={() => handleChange(tool, isChecked)}
               aria-label={`Toggle ${tool} function`}
+              sx={{
+                padding: '2px',
+                '& .MuiSvgIcon-root': { fontSize: 20 },
+              }}
             />
             <label className="ml-2 capitalize">{tool}</label>
           </div>

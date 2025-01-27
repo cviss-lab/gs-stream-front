@@ -35,7 +35,7 @@ function ModelSelector({
           </Button>
         </Tooltip>
       </div>
-      <Box className="h-40 border rounded-md p-2 overflow-auto">
+      <Box className="h-50 border rounded-md p-2 overflow-auto">
         {allModels.length === 0 ? (
           <div className="text-center text-gray-500">None</div>
         ) : (
@@ -44,11 +44,15 @@ function ModelSelector({
               model.name?.toLowerCase().includes(searchTerm.toLowerCase()),
             )
             .map((model) => (
-              <div key={model.id} className="flex items-center py-1">
+              <div key={model.id} className="flex items-center py">
                 <Checkbox
                   checked={selectedModelIds.includes(model.id)}
                   onChange={() => onModelSelection(model.id)}
                   aria-label={`Select ${model.name}`}
+                  sx={{
+                    padding: '2px',
+                    '& .MuiSvgIcon-root': { fontSize: 20 },
+                  }}
                 />
                 <label className="ml-2">{model.name}</label>
               </div>
