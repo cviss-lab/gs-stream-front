@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InspectionCanvas from './InspectionCanvas';
 
 function RenderArea({
@@ -9,6 +10,7 @@ function RenderArea({
   cameraControlsRef1,
   cameraControlsRef2,
   isAnnotationMode,
+  isCameraVisible,
 }) {
   return (
     <div
@@ -37,6 +39,7 @@ function RenderArea({
             rotationDelta={rotationDelta}
             isDroneVisible={isDroneVisible}
             isAnnotationMode={isAnnotationMode}
+            isCameraVisible={isCameraVisible}
           />
         </div>
       ))}
@@ -48,5 +51,14 @@ function RenderArea({
     </div>
   );
 }
+RenderArea.propTypes = {
+  selectedModels: PropTypes.array.isRequired,
+  delta: PropTypes.number.isRequired,
+  rotationDelta: PropTypes.number.isRequired,
+  isDroneVisible: PropTypes.bool.isRequired,
+  cameraControlsRef1: PropTypes.object,
+  cameraControlsRef2: PropTypes.object,
+  isAnnotationMode: PropTypes.bool.isRequired,
+};
 
 export default RenderArea;

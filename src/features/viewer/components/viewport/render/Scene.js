@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Environment } from '@react-three/drei';
 import CameraControls from '../camera/CameraControls';
@@ -16,6 +16,7 @@ function Scene({
   cameraControlsRef,
   isDroneVisible,
   isAnnotationMode,
+  isCameraVisible,
 }) {
   const splatRef = useRef(null);
 
@@ -54,7 +55,7 @@ function Scene({
         isAnnotationMode={isAnnotationMode}
         splatRef={splatRef}
       />
-      {model.cameraData && (
+      {isCameraVisible && model.cameraData && (
         <group rotation={[Math.PI, 0, 0]} scale={17.8}>
           <CameraArray data={model.cameraData} />
         </group>
@@ -87,6 +88,7 @@ Scene.propTypes = {
   setCameraPose: PropTypes.func.isRequired,
   cameraControlsRef: PropTypes.object,
   isAnnotationMode: PropTypes.bool,
+  isCameraVisible: PropTypes.bool,
 };
 
 export default Scene;
