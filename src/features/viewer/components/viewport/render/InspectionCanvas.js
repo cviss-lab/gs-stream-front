@@ -16,6 +16,7 @@ const InspectionCanvas = forwardRef(
       isDroneVisible,
       isPointAnnotationEnabled,
       isCameraAnnotationEnabled,
+      isComponentAnnotationEnabled,
     },
     ref,
   ) => {
@@ -45,6 +46,7 @@ const InspectionCanvas = forwardRef(
             isDroneVisible={isDroneVisible}
             isPointAnnotationEnabled={isPointAnnotationEnabled}
             isCameraAnnotationEnabled={isCameraAnnotationEnabled}
+            isComponentAnnotationEnabled={isComponentAnnotationEnabled}
           />
         </Canvas>
       </div>
@@ -71,6 +73,8 @@ InspectionCanvas.propTypes = {
   rotationDelta: PropTypes.number.isRequired,
   isDroneVisible: PropTypes.bool,
   isPointAnnotationEnabled: PropTypes.bool,
+  isCameraAnnotationEnabled: PropTypes.bool,
+  isComponentAnnotationEnabled: PropTypes.bool,
 };
 
 InspectionCanvas.defaultProps = {

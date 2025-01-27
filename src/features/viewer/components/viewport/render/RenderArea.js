@@ -11,6 +11,7 @@ function RenderArea({
   cameraControlsRef2,
   isPointAnnotationEnabled,
   isCameraAnnotationEnabled,
+  isComponentAnnotationEnabled,
 }) {
   return (
     <div
@@ -40,6 +41,7 @@ function RenderArea({
             isDroneVisible={isDroneVisible}
             isPointAnnotationEnabled={isPointAnnotationEnabled}
             isCameraAnnotationEnabled={isCameraAnnotationEnabled}
+            isComponentAnnotationEnabled={isComponentAnnotationEnabled}
           />
         </div>
       ))}
@@ -60,6 +62,7 @@ RenderArea.propTypes = {
   cameraControlsRef2: PropTypes.object,
   isPointAnnotationEnabled: PropTypes.bool.isRequired,
   isCameraAnnotationEnabled: PropTypes.bool.isRequired,
+  isComponentAnnotationEnabled: PropTypes.bool.isRequired,
 };
 
 export default RenderArea;

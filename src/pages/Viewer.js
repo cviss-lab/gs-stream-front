@@ -94,6 +94,9 @@ function Viewer() {
         isDroneVisible={displaySettings.isDroneVisible}
         isPointAnnotationEnabled={displaySettings.isPointAnnotationEnabled}
         isCameraAnnotationEnabled={displaySettings.isCameraAnnotationEnabled}
+        isComponentAnnotationEnabled={
+          displaySettings.isComponentAnnotationEnabled
+        }
         {...toolProps}
       />
       {selectedModelIds.length > 0 && (

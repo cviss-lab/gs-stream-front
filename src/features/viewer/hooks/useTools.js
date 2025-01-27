@@ -4,6 +4,7 @@ const TOOL_SETTINGS_MAP = {
   drone: 'isDroneVisible',
   'point annotations': 'isPointAnnotationEnabled',
   'camera annotations': 'isCameraAnnotationEnabled',
+  'component annotations': 'isComponentAnnotationEnabled',
 };
 
 export const useTools = (displaySettings, updateDisplaySettings) => {

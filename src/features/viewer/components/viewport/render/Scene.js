@@ -16,6 +16,7 @@ function Scene({
   isDroneVisible,
   isPointAnnotationEnabled,
   isCameraAnnotationEnabled,
+  // isComponentAnnotationEnabled,
 }) {
   return (
     <>
@@ -51,6 +52,7 @@ function Scene({
           <CameraArray data={model.cameraData} />
         </group>
       )}
+      {/* {isComponentAnnotationEnabled && model.componentData()} */}
     </>
   );
 }
@@ -80,6 +82,7 @@ Scene.propTypes = {
   cameraControlsRef: PropTypes.object,
   isPointAnnotationEnabled: PropTypes.bool,
   isCameraAnnotationEnabled: PropTypes.bool,
+  isComponentAnnotationEnabled: PropTypes.bool,
 };
 
 export default Scene;

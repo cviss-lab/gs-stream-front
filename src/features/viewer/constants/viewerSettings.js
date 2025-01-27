@@ -11,9 +11,9 @@ export const DEFAULT_VIEW_SETTINGS = {
   isPointAnnotationEnabled: false,
   isCameraAnnotationEnabled: false,
   modelPosition: [0, 0, 0],
-  maxPanX: 200,
-  maxPanY: 200,
-  maxPanZ: 200,
+  maxPanX: 2000,
+  maxPanY: 2000,
+  maxPanZ: 2000,
   cameraSettings: {
     position: [0, 0, 0],
     rotation: [0, 0, 0],
