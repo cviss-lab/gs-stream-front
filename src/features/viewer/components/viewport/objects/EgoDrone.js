@@ -4,7 +4,7 @@ import { useThree } from '@react-three/fiber';
 
 const DRONE_MODEL_PATH =
   process.env.PUBLIC_URL + '/model/drone_sample_centered.glb';
-const DRONE_SCALE = 20;
+const DRONE_SCALE = 1;
 const TOGGLE_KEY = 'KeyF';
 
 const EgoDrone = () => {

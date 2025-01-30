@@ -45,7 +45,7 @@ function Scene({
         maxSplats={20000000}
         splatPos={model.renderSettings.model.position}
         splatRot={[Math.PI, 0, 0]}
-        splatScale={17.8}
+        splatScale={1}
         splatUrl={model.splatUrl}
       />
       <Environment preset="city" />
@@ -56,7 +56,7 @@ function Scene({
         splatRef={splatRef}
       />
       {isCameraVisible && model.cameraData && (
-        <group rotation={[Math.PI, 0, 0]} scale={17.8}>
+        <group rotation={[Math.PI, 0, 0]} scale={1}>
           <CameraArray data={model.cameraData} />
         </group>
       )}

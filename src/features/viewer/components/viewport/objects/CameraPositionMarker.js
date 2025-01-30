@@ -49,7 +49,7 @@ const CameraPositionMarker = forwardRef(
           <Html distanceFactor={10} center>
             <div
               style={{
-                fontSize: '5.0em',
+                fontSize: '0.3em',
                 fontWeight: 'bold',
                 color: 'white',
                 textAlign: 'center',

@@ -1,6 +1,6 @@
 export const TEST_MODELS_CAMERA_DATA = [
   {
-    id: '106',
+    id: '104',
     cameraData: [
       {
         id: 257,
