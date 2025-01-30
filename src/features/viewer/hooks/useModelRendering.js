@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { DEFAULT_VIEW_SETTINGS } from '../constants/viewerSettings';
+import { getCameraDataById } from 'services/CameraDataService';
 
 const createModelRenderSettings = (model, viewSettings) => {
   return {
@@ -40,7 +41,7 @@ export const useModelRendering = (
           id: model.id,
           splatUrl: getWebglModelUrl(model.id),
           renderSettings: createModelRenderSettings(model, viewSettings),
-          cameraData: model.cameraData,
+          cameraData: model.hasCameraData ? getCameraDataById(model.id) : null,
         };
       })
       .filter(Boolean);
