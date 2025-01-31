@@ -42,9 +42,9 @@ function ControlPanel({
 ControlPanel.propTypes = {
   selectedModelIds: PropTypes.array.isRequired,
   onModelSelection: PropTypes.func.isRequired,
-  aiFunctions: PropTypes.array.isRequired,
+  aiFunctions: PropTypes.object.isRequired, // Change from array to object
   onAiFunctionChange: PropTypes.func.isRequired,
-  tools: PropTypes.array.isRequired,
+  tools: PropTypes.object.isRequired,
   onToolChange: PropTypes.func.isRequired,
   searchTerm: PropTypes.string.isRequired,
   setSearchTerm: PropTypes.func.isRequired,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Checkbox } from '@mui/material';
 
 function AiFunctions({ aiFunctions, onAiFunctionChange }) {
@@ -24,5 +25,9 @@ function AiFunctions({ aiFunctions, onAiFunctionChange }) {
     </div>
   );
 }
+AiFunctions.propTypes = {
+  aiFunctions: PropTypes.object.isRequired,
+  onAiFunctionChange: PropTypes.func.isRequired,
+};
 
 export default AiFunctions;

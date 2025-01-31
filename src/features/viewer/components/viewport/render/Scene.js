@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Environment, Splat } from '@react-three/drei';
+import {
+  Environment,
+  Splat,
+  OrbitControls,
+  GizmoHelper,
+  GizmoViewport,
+} from '@react-three/drei';
 import CameraControls from '../camera/CameraControls';
 import EgoDrone from '../objects/EgoDrone';
 import AnnotationHandler from 'features/annotation/AnnotationHandler';
 import CameraArray from '../objects/CameraPositionMarkerGroup';
+import MeshArray from '../objects/MeshArray';
 
 function Scene({
   model,
@@ -16,7 +23,7 @@ function Scene({
   isDroneVisible,
   isPointAnnotationEnabled,
   isCameraAnnotationEnabled,
-  // isComponentAnnotationEnabled,
+  isComponentAnnotationEnabled,
 }) {
   return (
     <>
@@ -52,7 +59,16 @@ function Scene({
           <CameraArray data={model.cameraData} />
         </group>
       )}
-      {/* {isComponentAnnotationEnabled && model.componentData()} */}
+      {isComponentAnnotationEnabled && model.componentData && (
+        <MeshArray data={model.componentData} />
+      )}
+      {/* <OrbitControls target={[0, 0, -320]} /> */}
+      {/* <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
+        <GizmoViewport
+          axisColors={['red', 'green', 'blue']}
+          labelColor="white"
+        />
+      </GizmoHelper> */}
     </>
   );
 }
@@ -63,6 +79,13 @@ Scene.propTypes = {
     renderSettings: PropTypes.shape({
       model: PropTypes.shape({
         position: PropTypes.arrayOf(PropTypes.number).isRequired,
+        componentData: PropTypes.arrayOf(
+          PropTypes.shape({
+            id: PropTypes.number,
+            position: PropTypes.arrayOf(PropTypes.number),
+            rotation: PropTypes.arrayOf(PropTypes.number),
+          }),
+        ),
       }).isRequired,
       camera: PropTypes.object.isRequired,
     }).isRequired,

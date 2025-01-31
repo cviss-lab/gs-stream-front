@@ -10,6 +10,7 @@ export const DEFAULT_VIEW_SETTINGS = {
   isDroneVisible: false,
   isPointAnnotationEnabled: false,
   isCameraAnnotationEnabled: false,
+  isComponentAnnotationEnabled: false,
   modelPosition: [0, 0, 0],
   maxPanX: 2000,
   maxPanY: 2000,

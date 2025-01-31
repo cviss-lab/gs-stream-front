@@ -8,8 +8,14 @@ const TOOL_SETTINGS_MAP = {
 };
 
 export const useTools = (displaySettings, updateDisplaySettings) => {
+  const defaultDisplaySettings = {
+    ...displaySettings,
+    isComponentAnnotationEnabled:
+      displaySettings.isComponentAnnotationEnabled ?? false,
+  };
+
   const tools = Object.keys(TOOL_SETTINGS_MAP).reduce((acc, tool) => {
-    acc[tool] = displaySettings[TOOL_SETTINGS_MAP[tool]];
+    acc[tool] = defaultDisplaySettings[TOOL_SETTINGS_MAP[tool]];
     return acc;
   }, {});
 

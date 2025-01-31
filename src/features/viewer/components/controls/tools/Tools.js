@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Checkbox } from '@mui/material';
 
 function Tools({ tools, onToolChange }) {
@@ -29,5 +30,9 @@ function Tools({ tools, onToolChange }) {
     </div>
   );
 }
+Tools.propTypes = {
+  tools: PropTypes.object.isRequired,
+  onToolChange: PropTypes.func.isRequired,
+};
 
 export default Tools;
