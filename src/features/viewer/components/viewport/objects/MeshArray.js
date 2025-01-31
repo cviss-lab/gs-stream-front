@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import DirectionalBox from './box/DirectionalBox';
 
@@ -6,10 +6,12 @@ export default function MeshArray({ data }) {
   const annotRefs = useRef([]);
   // console.log(data);
 
-  const handleStateChange = (state) => {
-    console.log(`State change detected in box ${state.name}:`, state);
-  };
-
+  const handleStateChange = useCallback((state) => {
+    // Prevent logging on initial render/unnecessary updates
+    if (state.type === 'update') {
+      console.log(`State change detected in box ${state.name}:`, state);
+    }
+  }, []);
   useEffect(() => {
     console.log('Name of all DirectionalBoxes:');
     annotRefs.current.forEach((ref, index) => {

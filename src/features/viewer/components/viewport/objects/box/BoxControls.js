@@ -7,17 +7,25 @@ const BoxControls = ({
   updatePosition,
 }) => {
   const styles = {
-    display: 'flex',
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    padding: '10px',
-    background: 'rgba(0, 0, 0, 0.8)',
-    borderRadius: '5px',
-    color: 'white',
+    container: {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      alignItems: 'center',
+      padding: '10px',
+      background: 'rgba(0, 0, 0, 0.8)',
+      borderRadius: '5px',
+      color: 'white',
+    },
+    input: {
+      margin: '5px',
+      width: '50px',
+      color: '#000000',
+      backgroundColor: '#ffffff',
+    },
   };
 
   return (
-    <div style={styles}>
+    <div style={styles.container}>
       <div>
         <label>
           Dim X:
@@ -25,7 +33,7 @@ const BoxControls = ({
             type="number"
             value={boxDimensions[0]}
             onChange={(e) => updateDimension(0, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.1"
             min="0"
             max="5"
@@ -37,7 +45,7 @@ const BoxControls = ({
             type="number"
             value={boxDimensions[1]}
             onChange={(e) => updateDimension(1, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.1"
             min="0"
             max="5"
@@ -49,7 +57,7 @@ const BoxControls = ({
             type="number"
             value={boxDimensions[2]}
             onChange={(e) => updateDimension(2, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.1"
             min="0"
             max="5"
@@ -63,7 +71,7 @@ const BoxControls = ({
             type="number"
             value={boxRotations[0]}
             onChange={(e) => updateRotation(0, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.017"
             min="-3.14"
             max={Math.PI}
@@ -75,7 +83,7 @@ const BoxControls = ({
             type="number"
             value={boxRotations[1]}
             onChange={(e) => updateRotation(1, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.017"
             min="-3.14"
             max={Math.PI}
@@ -87,7 +95,7 @@ const BoxControls = ({
             type="number"
             value={boxRotations[2]}
             onChange={(e) => updateRotation(2, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.017"
             min="-3.14"
             max={Math.PI}
@@ -101,7 +109,7 @@ const BoxControls = ({
             type="number"
             value={boxPositions[0]}
             onChange={(e) => updatePosition(0, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.1"
           />
         </label>
@@ -111,7 +119,7 @@ const BoxControls = ({
             type="number"
             value={boxPositions[1]}
             onChange={(e) => updatePosition(1, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.1"
           />
         </label>
@@ -121,7 +129,7 @@ const BoxControls = ({
             type="number"
             value={boxPositions[2]}
             onChange={(e) => updatePosition(2, e.target.value)}
-            style={{ margin: '5px', width: '50px' }}
+            style={styles.input}
             step="0.1"
           />
         </label>
