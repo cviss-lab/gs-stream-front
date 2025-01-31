@@ -18,7 +18,7 @@ function AiFunctions({ aiFunctions, onAiFunctionChange }) {
                 '& .MuiSvgIcon-root': { fontSize: 20 },
               }}
             />
-            <label className="ml-2 capitalize">{func}</label>
+            <label className="ml-2 capitalize">{func} (TBD)</label>
           </div>
         ))}
       </div>

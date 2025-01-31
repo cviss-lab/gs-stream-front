@@ -23,7 +23,9 @@ function Tools({ tools, onToolChange }) {
                 '& .MuiSvgIcon-root': { fontSize: 20 },
               }}
             />
-            <label className="ml-2 capitalize">{tool}</label>
+            <label className="ml-2 capitalize">
+              {tool} {tool === 'point annotations' ? '(TBD)' : ''}
+            </label>
           </div>
         ))}
       </div>
