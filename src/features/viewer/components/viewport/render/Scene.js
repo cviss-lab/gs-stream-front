@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Environment } from '@react-three/drei';
+import { Environment, Splat } from '@react-three/drei';
 import CameraControls from '../camera/CameraControls';
-import SplatComponent from '../splat/SplatComponent';
 import EgoDrone from '../objects/EgoDrone';
 import AnnotationHandler from 'features/annotation/AnnotationHandler';
 import CameraArray from '../objects/CameraPositionMarkerGroup';
@@ -18,8 +17,6 @@ function Scene({
   isAnnotationMode,
   isCameraVisible,
 }) {
-  const splatRef = useRef(null);
-
   return (
     <>
       <ambientLight intensity={Math.PI / 2} />
@@ -40,21 +37,15 @@ function Scene({
         setCameraPose={setCameraPose}
         renderSettings={model.renderSettings}
       />
-      <SplatComponent
-        splatRef={splatRef}
-        maxSplats={20000000}
-        splatPos={model.renderSettings.model.position}
-        splatRot={[Math.PI, 0, 0]}
-        splatScale={1}
-        splatUrl={model.splatUrl}
+      <Splat
+        src={model.splatUrl}
+        position={model.renderSettings.model.position}
+        scale={1}
       />
       <Environment preset="city" />
       {isDroneVisible && <EgoDrone />}
 
-      <AnnotationHandler
-        isAnnotationMode={isAnnotationMode}
-        splatRef={splatRef}
-      />
+      <AnnotationHandler isAnnotationMode={isAnnotationMode} />
       {isCameraVisible && model.cameraData && (
         <group rotation={[Math.PI, 0, 0]} scale={1}>
           <CameraArray data={model.cameraData} />

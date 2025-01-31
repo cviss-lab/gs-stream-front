@@ -23,7 +23,7 @@ const AnnotationHandler = forwardRef(({ isAnnotationMode, splatRef }, ref) => {
       return;
     }
 
-    const splatMesh = splatRef.current;
+    const splatMesh = splatRef;
     if (!splatMesh) {
       console.log('No splat mesh found:', splatRef);
       return;
