@@ -29,8 +29,11 @@ const CameraPositionMarker = forwardRef(
       }
     }, [clicked]);
 
+    // eslint-disable-next-line
+    const rotProps = Array.isArray(rotation) && rotation.length === 4 ? { quaternion: rotation } : rotation ? { rotation } : {};
+
     return (
-      <group position={position} rotation={rotation} scale={scale}>
+      <group position={position} {...rotProps} scale={scale}>
         <mesh
           ref={sphereRef}
           onClick={(event) => click(!clicked)}
@@ -40,7 +43,6 @@ const CameraPositionMarker = forwardRef(
           {/* Sphere geometry */}
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial
-            color={color}
             transparent
             color={hovered || clicked ? '#c02040' : color}
             opacity={clicked ? 0.8 : opacity}
