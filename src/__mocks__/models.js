@@ -38,6 +38,21 @@ export const TEST_MODELS = [
   { id: '103', name: 'RCH', file: 'rch.splat' },
   {
     id: '104',
+    name: 'tower/0609',
+    file: 'point_cloud_0609.splat',
+    viewSettings: {
+      camera: {
+        position: [0, 0, 8.2],
+        rotation: [0, 0, 0],
+        fov: 75,
+        near: 0.1,
+        far: 1000,
+      },
+    },
+    hasCameraData: true,
+  },
+  {
+    id: '105',
     name: 'tower/0607',
     file: 'point_cloud_0607.splat',
     viewSettings: {
@@ -52,7 +67,7 @@ export const TEST_MODELS = [
     hasCameraData: true,
   },
   {
-    id: '105',
+    id: '106',
     name: 'tower/0527_GPS',
     file: 'point_cloud_0527_GPS.splat',
     viewSettings: {
