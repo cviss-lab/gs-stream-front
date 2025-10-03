@@ -1,0 +1,36 @@
+Research Use License
+
+Copyright (c) 2025 Computer Vision for Smart Structure (CViSS) Lab, University of Waterloo
+
+Permission is hereby granted to use this software and associated data for
+research and educational purposes only, subject to the following conditions:
+
+1. PERMITTED USE:
+   - Use for academic research and educational purposes
+   - Modification and distribution for non-commercial research purposes
+   - Citation of this project in academic publications
+
+2. PROHIBITED USE:
+   - Commercial use of any kind
+   - Use of the software or data for commercial products or services
+   - Publication, redistribution, or use of the data for other research or
+     commercial purposes without explicit written permission
+   - Selling or licensing of the software or data
+
+3. DATA RESTRICTIONS:
+   - The data included in this project is proprietary and may not be published,
+     redistributed, or used for any purpose other than evaluating this software
+   - Derived datasets from this data may not be created or distributed
+   - The data may not be used to train machine learning models for commercial purposes
+
+4. ATTRIBUTION:
+   - Users must provide appropriate credit and citation when using this software
+     in research publications
+
+5. NO WARRANTY:
+   This software and data are provided "as is", without warranty of any kind,
+   express or implied, including but not limited to the warranties of
+   merchantability, fitness for a particular purpose and noninfringement.
+
+For commercial licensing or data usage inquiries, please contact the project
+maintainers.

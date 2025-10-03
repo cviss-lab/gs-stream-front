@@ -1,6 +1,28 @@
-# Getting Started with Create React App
+# GS Stream Front
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Getting Started
+
+### 1. Environment Setup
+
+Before running the application, you need to set up the environment variables:
+
+```bash
+cp .env.template .env
+```
+
+Edit the `.env` file to configure your environment:
+- `REACT_APP_STANDALONE`: Set to `true` to run with local test models, `false` to connect to backend
+- `REACT_APP_BACKEND_URL`: Backend server URL (required when standalone is false)
+- `REACT_APP_REQUIRE_AUTH`: Set to `true` to enable authentication
+- `REACT_APP_AUTH_BACKEND_URL`: Authentication server URL (required when auth is enabled)
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
 
 ## Available Scripts
 
@@ -29,42 +51,24 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `npm run lint`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Runs ESLint to check and fix code quality issues.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `npm run format`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Formats code using Prettier.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## License
 
-## Learn More
+Copyright (c) 2025 Computer Vision for Smart Structure (CViSS) Lab, University of Waterloo
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project is licensed for **research and educational purposes only**. Commercial use is strictly prohibited.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Key Restrictions:
+- ✅ Academic research and educational use
+- ❌ Commercial use of any kind
+- ❌ Publication or redistribution of the included data
+- ❌ Use of data for other research or commercial purposes
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+See the [LICENSE](LICENSE) file for full details.
